@@ -1,25 +1,23 @@
 <?php
 
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
-    public function up()
-    {
+return new class extends Migration {
+    public function up(): void {
         Schema::create('products', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->text('description')->nullable();
-            $table->decimal('price', 10, 2);
-            // ... другие поля
+            $table->id()->comment('Первичный ключ продукта');
+            $table->string('name')->comment('Название продукта');
+            $table->text('description')->nullable()->comment('Описание продукта');
+            $table->decimal('price', 12, 2)->comment('Цена продукта');
+            $table->string('image')->nullable()->comment('URL изображения продукта');
             $table->timestamps();
         });
     }
 
-    public function down()
-    {
+    public function down(): void {
         Schema::dropIfExists('products');
     }
 };

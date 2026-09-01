@@ -9,31 +9,24 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('phone')->nullable();
+            $table->id()
+                ->comment('Первичный ключ пользователя');
+            $table->string('first_name')
+                ->comment('Имя пользователя');
+            $table->string('last_name')
+                ->comment('Фамилия пользователя');
+            $table->string('email')
+                ->unique()
+                ->comment('Уникальный адрес электронной почты');
+            $table->string('phone', 20)
+                ->nullable()
+                ->unique()
+                ->comment('Номер телефона пользователя');
+            $table->timestamp('email_verified_at')
+                ->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->string('avatar')->nullable();
             $table->timestamps();
-        });
-
-        Schema::create('password_reset_tokens', function (Blueprint $table) {
-            $table->string('email')->primary();
-            $table->string('token');
-            $table->timestamp('created_at')->nullable();
-        });
-
-        Schema::create('sessions', function (Blueprint $table) {
-            $table->string('id')->primary();
-            $table->foreignId('user_id')->nullable()->index();
-            $table->string('ip_address', 45)->nullable();
-            $table->text('user_agent')->nullable();
-            $table->longText('payload');
-            $table->integer('last_activity')->index();
         });
     }
 
