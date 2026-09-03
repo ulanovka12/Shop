@@ -6,15 +6,19 @@ services:
         - "${NGINX_FORWARD_PORT}:80"
     volumes:
       - .:/var/www/html
-      - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+#      - ./docker/nginx/nginx-global.conf:/etc/nginx/nginx.conf          # глобальный
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf      # конфиг сайта
     restart: always
 
   php-fpm:
     container_name: php-fpm
-    user: "${UID:-1000}:${GID:-1000}"
     build:
       context: ./docker/docker_php
       dockerfile: Dockerfile
+      args:
+          USER_ID: ${UID:-1000}
+          GROUP_ID: ${GID:-1000}
+    user: "${UID:-1000}:${GID:-1000}"
     restart: always
     volumes:
       - .:/var/www/html
