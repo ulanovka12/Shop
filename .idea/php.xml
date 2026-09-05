@@ -350,6 +350,11 @@
       <path value="$PROJECT_DIR$/src_backup/vendor/doctrine/lexer" />
       <path value="$PROJECT_DIR$/src_backup/vendor/doctrine/inflector" />
       <path value="$PROJECT_DIR$/src_backup/vendor/fakerphp/faker" />
+      <path value="$PROJECT_DIR$/vendor/laravel/breeze" />
+      <path value="$PROJECT_DIR$/vendor/maddhatter/laravel-view-generator" />
+      <path value="$PROJECT_DIR$/vendor/inertiajs/inertia-laravel" />
+      <path value="$PROJECT_DIR$/vendor/tightenco/ziggy" />
+      <path value="$PROJECT_DIR$/vendor/laravel/sanctum" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.3" />
