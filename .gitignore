@@ -26,4 +26,3 @@ Homestead.json
 Homestead.yaml
 Thumbs.db
 /docker/postgres/data/
-/docker/postgres/data/
