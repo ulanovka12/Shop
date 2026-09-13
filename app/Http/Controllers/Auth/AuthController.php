@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\DTO\RegisterDto;
+use App\DTOs\RegisterDto;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
@@ -30,17 +30,19 @@ class AuthController extends Controller
     }
 
     /** Обработка регистрации */
+
     public function register(RegisterRequest $request): RedirectResponse
     {
         $dto = RegisterDto::fromRequest($request);
         $user = $this->service->register($dto);
 
-        Auth::login($user);
+//        Auth::login($user);
 
         return redirect()
             ->route('login.form')
             ->with('status', 'Регистрация прошла успешно');
     }
+
     public function login(LoginRequest $request): RedirectResponse
     {
         $credentials = $request->validated();

@@ -10,15 +10,13 @@ class UserService
 {
     public function register(RegisterDto $dto): User
     {
+
         $user = new User();
-        $user->first_name = $dto->firstName;
-        $user->last_name = $dto->lastName;
+        $user->name = $dto->name;
         $user->email = $dto->email;
         $user->password = Hash::make($dto->password);
-        $user->save();
 
-        // TODO: после изучения очередей добавить событие для отправки приветственного письма:
-        // event(new Registered($user));
+        $user->save();
 
         return $user;
     }

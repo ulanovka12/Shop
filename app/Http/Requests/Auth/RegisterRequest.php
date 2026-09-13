@@ -20,8 +20,7 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name'  => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255'],
             'email'      => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password'   => ['required', 'string', 'min:8', 'confirmed'],
         ];
@@ -40,8 +39,7 @@ class RegisterRequest extends FormRequest
             'email.unique' => 'Пользователь с таким email уже зарегистрирован.',
             'password.min' => 'Пароль должен быть не менее 8 символов',
             'password.required' => 'Введите пароль',
-            'first_name.required' => 'Введите имя',
-            'last_name.required' => 'Введите фамилию'
+            'name.required' => 'Введите имя',
         ];
     }
 }
