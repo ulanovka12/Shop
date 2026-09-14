@@ -14,9 +14,11 @@ class UserService
         $user = new User();
         $user->name = $dto->name;
         $user->email = $dto->email;
-        $user->password = Hash::make($dto->password);
+        $user->password = $dto->password;
 
-        $user->save();
+        if (! $user->save()) {
+            throw new \RuntimeException('save() вернул false — запись не создана');
+        }
 
         return $user;
     }
