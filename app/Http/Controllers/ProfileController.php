@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateProfileRequest;
@@ -8,9 +9,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\DTOs\UpdateProfileDto;
+use App\Service\UserService;
 
 class ProfileController extends Controller
 {
+    public function __construct(
+        private readonly UserService $userService,
+    ) {}
+
     /**
      * Display the user's profile form.
      */
@@ -22,19 +29,27 @@ class ProfileController extends Controller
     }
 
     /**
+     * Show the user's profile.
+     */
+    public function showProfile(): View
+    {
+        $user = Auth::user();
+
+        return view('auth.profile', compact('user'));
+    }
+
+    /**
      * Update the user's profile information.
      */
-    public function update(UpdateProfileRequest $request): RedirectResponse
+    public function updateProfile(UpdateProfileRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $dto = UpdateProfileDto::fromRequest($request);
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
+        $this->userService->updateProfile($dto);
 
-        $request->user()->save();
-
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return redirect()
+            ->route('profile.edit')
+            ->with('status', 'profile-updated');
     }
 
     /**

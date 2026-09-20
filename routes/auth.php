@@ -13,7 +13,6 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', fn() => view('dashboard'))->name('dashboard');
-    Route::get('/profile', fn() => view('profile.edit'))->name('profile.edit');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
