@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DTOs;
 
 use Illuminate\Http\Request;
@@ -10,7 +12,8 @@ class UpdateProfileDto
         public readonly string $name,
         public readonly string $email,
         public readonly ?string $password = null,
-    ) {}
+    ) {
+    }
 
     public static function fromRequest(Request $request): self
     {

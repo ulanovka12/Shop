@@ -1,22 +1,24 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\DTOs\UpdateProfileDto;
 use App\Http\Requests\UpdateProfileRequest;
+use App\Service\UserService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
-use App\DTOs\UpdateProfileDto;
-use App\Service\UserService;
 
 class ProfileController extends Controller
 {
     public function __construct(
         private readonly UserService $userService,
-    ) {}
+    ) {
+    }
 
     /**
      * Display the user's profile form.

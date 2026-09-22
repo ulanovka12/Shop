@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Auth;
 
 use App\DTOs\RegisterDto;
@@ -17,8 +19,8 @@ class AuthController extends Controller
 {
     public function __construct(
         private readonly UserService $userService,
-    )
-    {}
+    ) {
+    }
 
     public function showRegistrationForm(): Factory|View
     {

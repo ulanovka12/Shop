@@ -1,4 +1,5 @@
 {
+
     "$schema": "https://getcomposer.org/schema.json",
     "name": "laravel/laravel",
     "type": "project",
@@ -6,13 +7,14 @@
     "keywords": ["laravel", "framework"],
     "license": "MIT",
     "require": {
-        "php": "^8.3",
+        "php": "^8.4",
         "laravel/framework": "^13.17",
         "laravel/tinker": "^3.0",
         "spatie/laravel-data": "^4.23"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
+        "friendsofphp/php-cs-fixer": "^3.95",
         "laravel/breeze": "^2.4",
         "laravel/pail": "^1.2.5",
         "laravel/pao": "^1.0.6",
@@ -34,6 +36,8 @@
         }
     },
     "scripts": {
+        "csfix": "php-cs-fixer fix",
+        "cschk": "php-cs-fixer fix --dry-run --diff",
         "setup": [
             "composer install",
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",

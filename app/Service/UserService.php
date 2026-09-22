@@ -1,12 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service;
 
 use App\DTOs\RegisterDto;
 use App\DTOs\UpdateProfileDto;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-
 
 class UserService
 {
@@ -17,7 +18,7 @@ class UserService
         $user->email    = $dto->email;
         $user->password = Hash::make($dto->password); // см. примечание ниже
 
-        if (! $user->save()) {
+        if (!$user->save()) {
             throw new \RuntimeException('save() вернул false — запись не создана');
         }
 
@@ -51,8 +52,7 @@ class UserService
         User $user,
         string $currentPassword,
         string $newPassword
-    ): void
-    {
+    ): void {
         if (!Hash::check($currentPassword, $user->password)) {
             throw ValidationException::withMessages(['current_password' => 'Invalid current password']);
         }

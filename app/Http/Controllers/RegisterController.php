@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Auth\RegisterRequest;
 use App\DTOs\RegisterDto;
+use App\Http\Requests\Auth\RegisterRequest;
 
 class RegisterController extends Controller
 {
