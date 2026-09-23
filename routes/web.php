@@ -5,6 +5,8 @@ declare(strict_types=1);
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
+
 
 Route::middleware('guest')->group(function () {
     // registration
@@ -22,6 +24,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 
     // profile
     Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile.form');

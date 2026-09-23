@@ -15,10 +15,10 @@
         </div>
     </x-slot>
 
-    <div class="py-12 bg-gradient-to-br from-gray-50 to-indigo-50 min-h-screen">
+    <div class="py-12 bg-linear-to-br from-gray-50 to-indigo-50 min-h-screen">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
 
-            <div class="relative overflow-hidden bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 rounded-2xl shadow-xl">
+            <div class="relative overflow-hidden bg-linear-to-r from-indigo-600 via-purple-600 to-pink-600 rounded-2xl shadow-xl">
                 <div class="absolute inset-0 opacity-20">
                     <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
                         <circle cx="90" cy="10" r="30" fill="white"/>

@@ -12,6 +12,7 @@ services:
   php-fpm:
     container_name: php-fpm
     build: ./docker/docker_php
+    user: "${UID:-1000}:${GID:-1000}"
     restart: always
     volumes:
       - .:/var/www/html

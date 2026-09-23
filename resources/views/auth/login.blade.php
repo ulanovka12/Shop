@@ -1,19 +1,18 @@
 <x-guest-layout>
-    <div class="min-h-screen flex items-center justify-center px-4 py-12 bg-gradient-to-br from-indigo-50 via-white to-purple-50 relative overflow-hidden">
+    <div class="min-h-screen flex items-center justify-center px-4 py-12 bg-linear-to-br from-indigo-50 via-white to-purple-50 relative overflow-hidden">
 
-        {{-- Декоративные элементы фона --}}
         <div class="absolute top-0 -left-20 w-72 h-72 bg-indigo-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
         <div class="absolute bottom-0 -right-20 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
         <div class="absolute top-1/2 left-1/2 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
 
         <div class="relative w-full max-w-md">
 
-            {{-- Карточка --}}
+
             <div class="bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/50 overflow-hidden">
 
-                {{-- Шапка с логотипом --}}
+
                 <div class="px-8 pt-10 pb-6 text-center">
-                    <div class="mx-auto w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+                    <div class="mx-auto w-16 h-16 rounded-2xl bg-linear-to-br from-indigo-600 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/30">
                         <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
                         </svg>
@@ -22,10 +21,10 @@
                     <p class="mt-2 text-sm text-gray-500">Войдите в свою учетную запись</p>
                 </div>
 
-                {{-- Форма --}}
+
                 <div class="px-8 pb-8">
 
-                    {{-- Статус сессии --}}
+
                     @if (session('status'))
                         <div class="mb-5 p-3 rounded-lg bg-emerald-50 border border-emerald-200 flex items-start gap-2">
                             <svg class="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -36,9 +35,7 @@
                     @endif
 
                     <form method="POST" action="{{ route('login') }}" class="space-y-5">
-                        @csrf
 
-                        {{-- Email --}}
                         <div>
                             <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">
                                 {{ __('Email') }}
@@ -75,7 +72,6 @@
                             @enderror
                         </div>
 
-                        {{-- Пароль --}}
                         <div x-data="{ show: false }">
                             <label for="password" class="block text-sm font-semibold text-gray-700 mb-2">
                                 {{ __('Пароль') }}
@@ -99,7 +95,6 @@
                                            transition-all duration-200
                                            @error('password') border-red-300 bg-red-50 focus:border-red-500 focus:ring-red-200 @enderror"
                                 />
-                                {{-- Кнопка показать/скрыть пароль --}}
                                 <button
                                     type="button"
                                     @click="show = !show"
@@ -125,7 +120,6 @@
                             @enderror
                         </div>
 
-                        {{-- Запомнить меня + забыли пароль --}}
                         <div class="flex items-center justify-between">
                             <label for="remember_me" class="inline-flex items-center cursor-pointer">
                                 <input
@@ -145,11 +139,10 @@
                             @endif
                         </div>
 
-                        {{-- Кнопка входа --}}
                         <button
                             type="submit"
                             class="w-full inline-flex items-center justify-center gap-2 px-5 py-3
-                                   bg-gradient-to-r from-indigo-600 to-purple-600
+                                   bg-linear-to-r from-indigo-600 to-purple-600
                                    hover:from-indigo-700 hover:to-purple-700
                                    text-white font-semibold text-sm rounded-xl shadow-lg shadow-indigo-500/30
                                    hover:shadow-xl hover:shadow-indigo-500/40
@@ -164,7 +157,6 @@
                         </button>
                     </form>
 
-                    {{-- Разделитель --}}
                     @if (Route::has('register'))
                         <div class="mt-6 relative">
                             <div class="absolute inset-0 flex items-center">
@@ -186,7 +178,6 @@
                 </div>
             </div>
 
-            {{-- Футер --}}
             <p class="mt-6 text-center text-xs text-gray-400">
                 &copy; {{ date('Y') }} {{ config('app.name', 'Laravel') }}. Все права защищены.
             </p>

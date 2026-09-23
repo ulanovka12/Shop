@@ -15,16 +15,16 @@
         </div>
     </x-slot>
 
-    <div class="py-12 bg-gradient-to-br from-gray-50 to-indigo-50 min-h-screen">
+    <div class="py-12 bg-linear-to-br from-gray-50 to-indigo-50 min-h-screen">
         <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
 
             <div class="bg-white overflow-hidden shadow-lg rounded-2xl border border-gray-100">
 
                 {{-- Шапка с аватаром --}}
-                <div class="relative h-32 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+                <div class="relative h-32 bg-linear-to-r from-indigo-500 via-purple-500 to-pink-500">
                     <div class="absolute -bottom-12 left-8">
                         <div class="w-24 h-24 rounded-2xl bg-white p-1 shadow-xl">
-                            <div class="w-full h-full rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
+                            <div class="w-full h-full rounded-xl bg-linear-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
                                 <span class="text-3xl font-bold text-white">
                                     {{ strtoupper(mb_substr($user->name, 0, 1)) }}
                                 </span>
@@ -72,7 +72,7 @@
                 <div class="px-8 py-6 bg-gray-50 border-t border-gray-100 flex flex-col sm:flex-row gap-3">
 
                     <a href="{{ route('profile.edit') }}"
-                       class="inline-flex items-center justify-center gap-2 flex-1 px-5 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold text-sm rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                       class="inline-flex items-center justify-center gap-2 flex-1 px-5 py-2.5 bg-linear-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold text-sm rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                         </svg>

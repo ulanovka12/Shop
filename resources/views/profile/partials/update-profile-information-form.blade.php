@@ -109,7 +109,7 @@
         {{-- Кнопка сохранения --}}
         <div class="flex items-center gap-4 pt-2">
             <button type="submit"
-                    class="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600
+                    class="inline-flex items-center gap-2 px-5 py-2.5 bg-linear-to-r from-indigo-600 to-purple-600
                            hover:from-indigo-700 hover:to-purple-700
                            text-white font-semibold text-sm rounded-lg shadow-md hover:shadow-lg
                            transform hover:-translate-y-0.5 transition-all duration-200

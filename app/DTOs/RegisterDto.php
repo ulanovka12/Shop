@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\DTOs;
 
-use App\Http\Requests\Auth\RegisterRequest;
+use App\Http\Requests\RegisterRequest;
 use Spatie\LaravelData\Data;
 
 class RegisterDto extends Data
