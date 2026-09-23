@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Service;
+namespace App\Services;
 
 use App\DTOs\RegisterDto;
 use App\DTOs\UpdateProfileDto;
 use App\Models\User;
+use App\Services\ValidationException;
 use Illuminate\Support\Facades\Hash;
 
 class UserService

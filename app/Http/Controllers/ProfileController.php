@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
 
 use App\DTOs\UpdateProfileDto;
 use App\Http\Requests\UpdateProfileRequest;
-use App\Service\UserService;
+use App\Services\UserService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
