@@ -1,17 +1,46 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex items-center gap-3">
-            <div class="p-2 bg-indigo-100 rounded-lg">
-                <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
-                </svg>
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="p-2 bg-indigo-100 rounded-lg">
+                    <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                    </svg>
+                </div>
+                <div>
+                    <h2 class="font-bold text-2xl text-gray-900 leading-tight">
+                        {{ __('Dashboard') }}
+                    </h2>
+                    <p class="text-sm text-gray-500">Обзор вашей активности</p>
+                </div>
             </div>
-            <div>
-                <h2 class="font-bold text-2xl text-gray-900 leading-tight">
-                    {{ __('Dashboard') }}
-                </h2>
-                <p class="text-sm text-gray-500">Обзор вашей активности</p>
-            </div>
+
+            <nav class="flex items-center gap-2">
+                <a href="{{ route('products.index') }}"
+                   class="inline-flex items-center gap-2 px-4 py-2.5 bg-white hover:bg-indigo-50
+                          text-indigo-600 border border-indigo-200 hover:border-indigo-300
+                          font-semibold text-sm rounded-lg shadow-sm hover:shadow-md
+                          transform hover:-translate-y-0.5 transition-all duration-200
+                          focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                    </svg>
+                    Каталог
+                </a>
+
+                <a href="{{ route('profile.edit') }}"
+                   class="inline-flex items-center gap-2 px-4 py-2.5
+                          bg-linear-to-r from-indigo-600 to-purple-600
+                          hover:from-indigo-700 hover:to-purple-700
+                          text-white font-semibold text-sm rounded-lg shadow-md hover:shadow-lg
+                          transform hover:-translate-y-0.5 transition-all duration-200
+                          focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                    </svg>
+                    Профиль
+                </a>
+            </nav>
         </div>
     </x-slot>
 
@@ -120,13 +149,13 @@
                     </div>
                     <div class="divide-y divide-gray-100">
                         @foreach([
-                            ['color' => 'indigo', 'text' => 'Вы вошли в систему', 'time' => 'Только что'],
-                            ['color' => 'emerald', 'text' => 'Профиль был обновлён', 'time' => '5 минут назад'],
-                            ['color' => 'amber', 'text' => 'Изменён пароль', 'time' => '1 час назад'],
-                            ['color' => 'purple', 'text' => 'Создан новый проект', 'time' => 'Вчера'],
+                            ['dot' => 'bg-indigo-500',  'text' => 'Вы вошли в систему',    'time' => 'Только что'],
+                            ['dot' => 'bg-emerald-500', 'text' => 'Профиль был обновлён',  'time' => '5 минут назад'],
+                            ['dot' => 'bg-amber-500',   'text' => 'Изменён пароль',        'time' => '1 час назад'],
+                            ['dot' => 'bg-purple-500',  'text' => 'Создан новый проект',   'time' => 'Вчера'],
                         ] as $item)
                             <div class="p-4 hover:bg-gray-50 transition-colors flex items-center gap-4">
-                                <div class="w-2 h-2 rounded-full bg-{{ $item['color'] }}-500 flex-shrink-0"></div>
+                                <div class="w-2 h-2 rounded-full {{ $item['dot'] }} flex-shrink-0"></div>
                                 <div class="flex-1 min-w-0">
                                     <p class="text-sm font-medium text-gray-900">{{ $item['text'] }}</p>
                                     <p class="text-xs text-gray-500 mt-0.5">{{ $item['time'] }}</p>
@@ -141,32 +170,32 @@
                     <p class="text-sm text-gray-500 mt-1">Часто используемые функции</p>
 
                     <div class="mt-5 space-y-3">
-                        <a href="{{ route('profile.edit') }}"
+                        <a href="{{ route('products.index') }}"
                            class="flex items-center gap-3 p-3 rounded-xl hover:bg-indigo-50 border border-gray-100 hover:border-indigo-200 transition-all group">
                             <div class="w-10 h-10 rounded-lg bg-indigo-100 group-hover:bg-indigo-600 flex items-center justify-center transition-colors">
                                 <svg class="w-5 h-5 text-indigo-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
                                 </svg>
                             </div>
                             <div class="flex-1">
-                                <p class="text-sm font-semibold text-gray-900">Профиль</p>
-                                <p class="text-xs text-gray-500">Настройки аккаунта</p>
+                                <p class="text-sm font-semibold text-gray-900">Каталог</p>
+                                <p class="text-xs text-gray-500">Все товары магазина</p>
                             </div>
                             <svg class="w-4 h-4 text-gray-400 group-hover:text-indigo-600 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                             </svg>
                         </a>
 
-                        <a href="#"
+                        <a href="{{ route('profile.edit') }}"
                            class="flex items-center gap-3 p-3 rounded-xl hover:bg-emerald-50 border border-gray-100 hover:border-emerald-200 transition-all group">
                             <div class="w-10 h-10 rounded-lg bg-emerald-100 group-hover:bg-emerald-600 flex items-center justify-center transition-colors">
                                 <svg class="w-5 h-5 text-emerald-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                                 </svg>
                             </div>
                             <div class="flex-1">
-                                <p class="text-sm font-semibold text-gray-900">Создать</p>
-                                <p class="text-xs text-gray-500">Новая запись</p>
+                                <p class="text-sm font-semibold text-gray-900">Профиль</p>
+                                <p class="text-xs text-gray-500">Настройки аккаунта</p>
                             </div>
                             <svg class="w-4 h-4 text-gray-400 group-hover:text-emerald-600 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
@@ -191,7 +220,6 @@
                         </a>
                     </div>
                 </div>
-
             </div>
 
         </div>

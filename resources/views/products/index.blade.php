@@ -3,7 +3,9 @@
 @section('title', 'Каталог товаров')
 
 @section('content')
+
     @php($perPage = $products->perPage())
+
 
     <div class="min-h-screen bg-linear-to-br from-gray-50 to-indigo-50 py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -44,11 +46,12 @@
                         <div class="group bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden
                                     hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
 
-                            <div class="relative aspect-square overflow-hidden bg-gray-100">
+                            <div class="relative overflow-hidden bg-gray-100" style="height: 200px;">
                                 @if($product->image)
                                     <img src="{{ asset('storage/' . $product->image) }}"
                                          alt="{{ $product->name }}"
-                                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                         style="width: 100%; height: 100%; object-fit: cover; object-position: center;"
+                                         class="group-hover:scale-105 transition-transform duration-500">
                                 @else
                                     <div class="w-full h-full flex items-center justify-center">
                                         <svg class="w-12 h-12 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -57,7 +60,6 @@
                                     </div>
                                 @endif
                             </div>
-
                             <div class="p-4 flex flex-col flex-1">
                                 <h3 class="text-sm font-semibold text-gray-900 line-clamp-2 min-h-[2.5rem]">
                                     {{ $product->name }}
