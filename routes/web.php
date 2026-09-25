@@ -36,4 +36,7 @@ Route::middleware('auth')->group(function () {
     // password
     Route::get('/change-password', [AuthController::class, 'showChangePasswordForm'])->name('password.form');
     Route::post('/change-password', [AuthController::class, 'updatePassword'])->name('password.update');
+
+    Route::get('/products/{product}', [ProductController::class, 'show'])
+        ->name('products.show');
 });

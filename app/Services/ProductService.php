@@ -27,5 +27,11 @@ class ProductService
             ->paginate($perPage)
             ->withQueryString();
     }
+    public function getProductPageData(Product $product): array
+    {
+        return [
+            'product' => $product,
+        ];
+    }
 }
 

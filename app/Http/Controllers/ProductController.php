@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\DTOs\ProductFilterDto;
 use App\Http\Requests\ProductFilterRequest;
+use App\Models\Product;
 use App\Services\ProductService;
 use Illuminate\View\View;
 
@@ -23,6 +24,11 @@ class ProductController extends Controller
             'products' => $this->productService->getProducts($dto),
         ]);
     }
+
+    public function show(Product $product)
+    {
+        $data = $this->productService->getProductPageData($product);
+
+        return view('products.show', $data);
+    }
 }
-
-

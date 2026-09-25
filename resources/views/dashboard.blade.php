@@ -15,6 +15,7 @@
                 </div>
             </div>
 
+
             <nav class="flex items-center gap-2">
                 <a href="{{ route('products.index') }}"
                    class="inline-flex items-center gap-2 px-4 py-2.5 bg-white hover:bg-indigo-50
