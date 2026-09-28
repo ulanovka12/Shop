@@ -26,5 +26,3 @@ class ProductFilterRequest extends FormRequest
         ];
     }
 }
-
-

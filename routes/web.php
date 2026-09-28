@@ -3,10 +3,9 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProductController;
-
 
 Route::middleware('guest')->group(function () {
     // registration
@@ -39,4 +38,6 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/products/{product}', [ProductController::class, 'show'])
         ->name('products.show');
+
+    Route::view('/', 'main')->name('home');
 });

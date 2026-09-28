@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DTOs;
 
 use App\Http\Requests\ProductListRequest;
@@ -9,7 +11,8 @@ class ProductListDto extends Data
 {
     public function __construct(
         public int $perPage,
-    ) {}
+    ) {
+    }
 
     public static function fromRequest(ProductListRequest $request): self
     {
@@ -18,5 +21,3 @@ class ProductListDto extends Data
         );
     }
 }
-
-

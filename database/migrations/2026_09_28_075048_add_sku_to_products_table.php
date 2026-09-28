@@ -10,18 +10,14 @@ return new class () extends Migration {
     public function up(): void
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->foreignId('category_id')
-                ->nullable()
-                ->after('id')
-                ->constrained('categories')
-                ->nullOnDelete();
+            $table->string('sku')->nullable()->unique();
         });
     }
 
     public function down(): void
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->dropConstrainedForeignId('category_id');
+            $table->dropColumn('sku');
         });
     }
 };
