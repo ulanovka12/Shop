@@ -36,4 +36,16 @@ class ProductFilterDto extends Data
             per_page: isset($validated['per_page']) ? (int) $validated['per_page'] : 10,
         );
     }
+
+    public static function fromArray(array $data): self
+    {
+        return new self(
+            q:         $data['q'] ?? null,
+            min_price: isset($data['min_price']) ? (int) $data['min_price'] : null,
+            max_price: isset($data['max_price']) ? (int) $data['max_price'] : null,
+            in_stock:  filter_var($data['in_stock'] ?? false, FILTER_VALIDATE_BOOLEAN),
+            sort:      $data['sort'] ?? 'new',
+            per_page:  isset($data['per_page']) ? (int) $data['per_page'] : 10,
+        );
+    }
 }

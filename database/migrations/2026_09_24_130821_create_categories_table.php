@@ -14,16 +14,15 @@ return new class () extends Migration {
             $table->string('name');
             $table->string('slug')->unique();
             $table->text('description')->nullable();
+
             $table->foreignId('parent_id')
                 ->nullable()
                 ->constrained('categories')
                 ->nullOnDelete();
+
             $table->boolean('is_active')->default(true);
             $table->unsignedInteger('sort_order')->default(0);
             $table->timestamps();
-
-            $table->index('parent_id');
-            $table->index('is_active');
         });
     }
 

@@ -46,6 +46,40 @@
                 </div>
             @endif
 
+            @if(isset($categories) && $categories->isNotEmpty())
+                    <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-5 sm:p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center">
+                                <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M4 6h16M4 12h16M4 18h7"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-base font-semibold text-gray-900">Категории</h3>
+                                <p class="text-xs text-gray-500">Выберите категорию товаров</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            @foreach($categories as $cat)
+                                @php($active = isset($category) && $category->id === $cat->id)
+                                <a href="{{ route('categories.show', $cat) }}"
+                                   class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium
+                          border transition-all duration-200
+                          {{ $active
+                              ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white border-transparent shadow-md'
+                              : 'bg-gray-50 text-gray-700 border-gray-200 hover:bg-indigo-50 hover:border-indigo-300 hover:text-indigo-700' }}">
+                                    <span>{{ $cat->name }}</span>
+                                    <span class="inline-flex items-center justify-center min-w-[1.5rem] h-6 px-1.5 rounded-full text-xs font-bold
+                                 {{ $active ? 'bg-white/20 text-white' : 'bg-white text-gray-600 border border-gray-200' }}">
+                        {{ $cat->products_count }}
+                    </span>
+                                </a>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
+
             <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
                 <div class="p-5 sm:p-6 border-b border-gray-100 flex items-center gap-3">
                     <div class="w-10 h-10 rounded-lg bg-indigo-100 flex items-center justify-center">
