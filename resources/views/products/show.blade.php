@@ -162,22 +162,23 @@
                         </div>
 
                         <div class="mt-8 flex flex-col sm:flex-row gap-3">
-                            <button type="button"
-                                    {{ $product->stock <= 0 ? 'disabled' : '' }}
-                                    class="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5
-                                           bg-linear-to-r from-indigo-600 to-purple-600
-                                           hover:from-indigo-700 hover:to-purple-700
-                                           text-white font-semibold text-sm rounded-xl shadow-lg shadow-indigo-500/30
-                                           hover:shadow-xl hover:shadow-indigo-500/40
-                                           transform hover:-translate-y-0.5 active:translate-y-0
-                                           transition-all duration-200
-                                           disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0
-                                           focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
-                                </svg>
-                                Добавить в корзину
-                            </button>
+                            <form method="POST"
+                                  action="{{ route('cart.items.store', $product) }}"
+                                  data-ajax-cart
+                                  data-toast="Товар добавлен в корзину"
+                                  class="flex-1">
+                                @csrf
+                                <input type="hidden" name="quantity" value="1">
+
+                                <button type="submit"
+                                        class="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5
+                   bg-linear-to-r from-indigo-600 to-purple-600
+                   hover:from-indigo-700 hover:to-purple-700
+                   text-white font-semibold text-sm rounded-xl shadow-lg shadow-indigo-50
+                   ...">
+                                    Добавить в корзину
+                                </button>
+                            </form>
 
                             <button type="button"
                                     class="inline-flex items-center justify-center gap-2 px-6 py-3.5
