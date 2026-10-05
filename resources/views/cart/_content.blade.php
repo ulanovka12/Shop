@@ -138,7 +138,6 @@
                     </div>
                 </div>
 
-                {{-- Итог --}}
                 <div class="lg:col-span-1">
                     <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sticky top-6">
                         <h2 class="text-lg font-semibold text-gray-900 mb-4">Итого</h2>
@@ -159,19 +158,60 @@
                         <div class="mt-4 pt-4 border-t border-gray-100 flex justify-between items-baseline">
                             <span class="text-base font-semibold text-gray-900">К оплате</span>
                             <span class="text-2xl font-bold text-gray-900">
-                                {{ number_format((float) $totalPrice, 0, '.', ' ') }} ₽
-                            </span>
+                {{ number_format((float) $totalPrice, 0, '.', ' ') }} ₽
+            </span>
                         </div>
 
+                        {{-- Форма оформления заказа --}}
+                        <form method="POST" action="{{ route('orders.store') }}" class="mt-6">
+                            @csrf
+
+                            <h3 class="text-sm font-semibold text-gray-900 mb-3">Способ оплаты</h3>
+
+                            <div class="space-y-2">
+                                <label class="flex items-center gap-3 p-3 rounded-xl border border-gray-200
+                              hover:border-indigo-300 hover:bg-indigo-50/50
+                              cursor-pointer transition-colors">
+                                    <input type="radio"
+                                           name="payment_method"
+                                           value="cash"
+                                           class="text-indigo-600 focus:ring-indigo-500"
+                                        @checked(old('payment_method', 'cash') === 'cash')>
+                                    <span class="text-sm text-gray-700">Наличными при получении</span>
+                                </label>
+
+                                <label class="flex items-center gap-3 p-3 rounded-xl border border-gray-200
+                              hover:border-indigo-300 hover:bg-indigo-50/50
+                              cursor-pointer transition-colors">
+                                    <input type="radio"
+                                           name="payment_method"
+                                           value="card"
+                                           class="text-indigo-600 focus:ring-indigo-500"
+                                        @checked(old('payment_method') === 'card')>
+                                    <span class="text-sm text-gray-700">Картой при получении</span>
+                                </label>
+                            </div>
+
+                            <button type="submit"
+                                    class="mt-5 w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl
+                           bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-sm font-semibold
+                           hover:from-indigo-700 hover:to-purple-700
+                           shadow-sm hover:shadow-lg transition-all">
+                                Оформить заказ
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                </svg>
+                            </button>
+                        </form>
+
                         <a href="{{ route('products.index') }}"
-                           class="mt-6 w-full inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl
-                                  bg-gray-50 text-gray-700 text-sm font-medium
-                                  hover:bg-gray-100 transition-colors">
+                           class="mt-3 w-full inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl
+                  bg-gray-50 text-gray-700 text-sm font-medium
+                  hover:bg-gray-100 transition-colors">
                             Продолжить покупки
                         </a>
                     </div>
                 </div>
-            </div>
         @endif
 
     </div>
