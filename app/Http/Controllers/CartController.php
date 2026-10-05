@@ -4,18 +4,24 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\DTOs\CartItemData;
+use App\Http\Requests\AddToCartRequest;
+use App\Http\Requests\UpdateCartRequest;
 use App\Models\Product;
 use App\Services\SessionCartService;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class CartController
+class CartController extends Controller
 {
     public function __construct(
         private SessionCartService $sessionCartService,
     ) {
     }
+
 
     public function index(): Factory|View
     {
@@ -25,44 +31,39 @@ class CartController
             'totalPrice'    => $this->sessionCartService->getTotalPrice(),
         ]);
     }
-
-    public function store(Request $request, Product $product)
+    public function store(AddToCartRequest $request, Product $product): JsonResponse|RedirectResponse
     {
-        $data = $request->validate([
-            'quantity' => ['nullable', 'integer', 'min:1'],
-        ]);
-
-        $this->sessionCartService->add($product, (int) ($data['quantity'] ?? 1));
+        $this->sessionCartService->add(
+            CartItemData::fromRequest($request, $product)
+        );
 
         return $this->respond($request);
     }
 
-    public function update(Request $request, Product $product)
+    public function update(UpdateCartRequest $request, Product $product): JsonResponse|RedirectResponse
     {
-        $data = $request->validate([
-            'quantity' => ['required', 'integer', 'min:0'],
-        ]);
-
-        $this->sessionCartService->setQuantity($product, (int) $data['quantity']);
+        $this->sessionCartService->setQuantity(
+            CartItemData::fromRequest($request, $product)
+        );
 
         return $this->respond($request);
     }
 
-    public function destroy(Request $request, Product $product)
+    public function destroy(Request $request, Product $product): JsonResponse|RedirectResponse
     {
         $this->sessionCartService->remove($product);
 
         return $this->respond($request);
     }
 
-    public function clear(Request $request)
+    public function clear(Request $request): JsonResponse|RedirectResponse
     {
         $this->sessionCartService->clear();
 
         return $this->respond($request);
     }
 
-    private function respond(Request $request)
+    private function respond(Request $request): JsonResponse|RedirectResponse
     {
         $cartCount = $this->sessionCartService->getTotalQuantity();
 

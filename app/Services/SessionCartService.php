@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services;
 
+use App\DTOs\CartItemData;
 use App\Models\Product;
 
 class SessionCartService
@@ -88,9 +89,15 @@ class SessionCartService
         return $total;
     }
 
-    public function add(Product $product, int $quantity = 1): int
+
+    public function add(CartItemData $data): int
     {
-        $quantity = max(1, $quantity);
+        $product = Product::find($data->productId);
+        if (!$product) {
+            return 0;
+        }
+
+        $quantity = max(1, $data->quantity);
 
         if ($product->stock <= 0) {
             $this->removeById($product->id);
@@ -105,9 +112,14 @@ class SessionCartService
         return $next;
     }
 
-    public function setQuantity(Product $product, int $quantity): int
+    public function setQuantity(CartItemData $data): int
     {
-        $quantity = max(0, $quantity);
+        $product = Product::find($data->productId);
+        if (!$product) {
+            return 0;
+        }
+
+        $quantity = max(0, $data->quantity);
 
         if ($product->stock <= 0 || $quantity === 0) {
             $this->removeById($product->id);

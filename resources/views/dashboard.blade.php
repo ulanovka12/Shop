@@ -203,6 +203,23 @@
                             </svg>
                         </a>
 
+                        <a href="{{ route('cart.index') }}"
+                           class="flex items-center gap-3 p-3 rounded-xl hover:bg-emerald-50 border border-gray-100 hover:border-emerald-200 transition-all group">
+                            <div class="w-10 h-10 rounded-lg bg-emerald-100 group-hover:bg-emerald-600 flex items-center justify-center transition-colors">
+                                <svg class="w-5 h-5 text-emerald-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                </svg>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm font-semibold text-gray-900">Корзина</p>
+                                <p class="text-xs text-gray-500">Ваши товары</p>
+                            </div>
+                            <svg class="w-4 h-4 text-gray-400 group-hover:text-emerald-600 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+
+
                         <a href="#"
                            class="flex items-center gap-3 p-3 rounded-xl hover:bg-purple-50 border border-gray-100 hover:border-purple-200 transition-all group">
                             <div class="w-10 h-10 rounded-lg bg-purple-100 group-hover:bg-purple-600 flex items-center justify-center transition-colors">

@@ -29,7 +29,6 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
-        // Страница товара — отдельный урок, здесь оставляем как есть
         return view('products.show', compact('product'));
     }
 }
