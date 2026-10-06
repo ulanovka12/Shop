@@ -8,10 +8,9 @@ class LoginController
 {
     public function store(LoginRequest $request)
     {
-        // Преобразуем реквест в DTO
+
         $dto = loginDTO::fromRequest($request);
 
-        // Передаём DTO в сервис
         $this->userService->register($dto);
     }
 

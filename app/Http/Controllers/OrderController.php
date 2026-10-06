@@ -6,7 +6,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\OrderStatusRequest;
 use App\Http\Requests\OrderStoreRequest;
-use App\models\Order;
+use App\Models\Order;
+use App\Services\OrderService;
 use App\Services\SessionCartService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;

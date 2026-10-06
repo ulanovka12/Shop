@@ -5,7 +5,11 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\Product;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 
 class OrderService
 {
@@ -43,8 +47,10 @@ class OrderService
                 OrderItem::create([
                     'order_id' => $order->id,
                     'product_id' => $product->id,
+                    'product_name' => $product->name,
                     'quantity' => $item['quantity'],
                     'price' => $item['unit_price'],
+                    'subtotal'     => $item['quantity'] * $item['unit_price'],
                 ]);
             }
 
@@ -96,6 +102,20 @@ class OrderService
             $order->save();
         });
     }
+
+
+    public function cancel(Order $order): void
+    {
+        if ($order->status !== Order::STATUS_PENDING) {
+            throw ValidationException::withMessages([
+                'status' => 'Нельзя отменить заказ в текущем статусе.',
+            ]);
+        }
+
+        $order->status = Order::STATUS_CANCELED;
+        $order->save();
+    }
+
 
 
 }

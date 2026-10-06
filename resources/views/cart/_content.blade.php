@@ -7,7 +7,6 @@
         </div>
 
         @if(count($items) === 0)
-            {{-- Пустая корзина --}}
             <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-12 text-center">
                 <div class="mx-auto w-20 h-20 rounded-full bg-indigo-50 flex items-center justify-center mb-5">
                     <svg class="w-10 h-10 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -35,7 +34,6 @@
                         <div class="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow p-4 sm:p-5">
                             <div class="flex items-start gap-4">
 
-                                {{-- Изображение --}}
                                 <div class="shrink-0 w-20 h-20 sm:w-24 sm:h-24 rounded-xl bg-gray-50 overflow-hidden flex items-center justify-center">
                                     @if($product->image)
                                         <img src="{{ asset('storage/' . $product->image) }}"
@@ -78,7 +76,6 @@
                                     </div>
 
                                     <div class="mt-3 flex items-center justify-between gap-3 flex-wrap">
-                                        {{-- Счётчик --}}
                                         <form action="{{ route('cart.items.update', $product) }}" method="POST"
                                               data-ajax-cart
                                               data-cart-action="set"
@@ -103,18 +100,6 @@
                                                 </svg>
                                             </button>
                                         </form>
-
-                                        {{-- товар --}}
-                                        <form ... data-ajax-cart data-toast="Товар добавлен в корзину">
-
-                                            {{-- удалить --}}
-                                            <form ... data-ajax-cart data-toast="Товар удалён">
-
-                                                {{-- счётчик --}}
-                                                <form ... data-ajax-cart data-cart-action="set" data-toast="Количество обновлено">
-
-                                                    {{-- очистить --}}
-                                                    <form ... data-ajax-cart data-toast="Корзина очищена">
                                         <div class="text-right">
                                             <div class="text-lg font-bold text-gray-900">
                                                 {{ number_format((float) $item['subtotal'], 0, '.', ' ') }} ₽

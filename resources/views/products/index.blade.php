@@ -31,6 +31,28 @@
                 </svg>
                 На главную
             </a>
+
+            <a href="{{ route('cart.index') }}"
+               class="inline-flex items-center gap-2 px-4 py-2.5 bg-white hover:bg-indigo-50
+                      text-indigo-600 border border-indigo-200 hover:border-indigo-300
+                      font-semibold text-sm rounded-lg shadow-sm hover:shadow-md
+                      transform hover:-translate-y-0.5 transition-all duration-200">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3"/>
+                </svg>
+                Моя Корзина
+            </a>
+
+            <a href="{{ route('orders.index') }}"
+               class="inline-flex items-center gap-2 px-4 py-2.5 bg-white hover:bg-indigo-50
+                      text-indigo-600 border border-indigo-200 hover:border-indigo-300
+                      font-semibold text-sm rounded-lg shadow-sm hover:shadow-md
+                      transform hover:-translate-y-0.5 transition-all duration-200">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3"/>
+                </svg>
+                Мои заказы
+            </a>
         </div>
     </x-slot>
 

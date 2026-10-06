@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\Http\Requests;
 
-// app/Http/Requests/OrderStoreRequest.php
+use App\Models\Order;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class OrderStoreRequest extends FormRequest
+class OrderStatusRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -16,7 +18,7 @@ class OrderStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'payment_method' => ['required', 'in:cash,card'],
+            'status' => ['required', Rule::in([Order::STATUS_PAID, Order::STATUS_CANCELED])],
         ];
     }
 }
