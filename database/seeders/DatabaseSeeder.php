@@ -19,8 +19,9 @@ class DatabaseSeeder extends Seeder
     {
 
         $this->call([
-            CategorySeeder::class,   // сначала категории
-            ProductSeeder::class,    // потом товары (ссылаются на категории)
+//            CategorySeeder::class,   // сначала категории
+//            ProductSeeder::class,    // потом товары (ссылаются на категории)
+            RoleSeeder::class,
         ]);
     }
 }
