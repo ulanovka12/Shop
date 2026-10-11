@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\Services;
 
+use App\DTOs\ProductDto;
 use App\DTOs\ProductFilterDto;
 use App\Models\Product;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Storage;
 
 class ProductService
 {
@@ -114,4 +116,43 @@ class ProductService
             ->paginate($dto->per_page)
             ->withQueryString();
     }
+
+    public function create(ProductDto $dto): Product
+    {
+        $data = $dto->toProductData();
+
+        if ($dto->image) {
+            $data['image'] = $dto->image->store('products', 'public');
+        }
+
+        return Product::create($data);
+    }
+
+
+    public function update(Product $product, ProductDto $dto): Product
+    {
+        $data = $dto->toProductData();
+
+        if ($dto->image) {
+            if ($product->image) {
+                Storage::disk('public')->delete($product->image);
+            }
+
+            $data['image'] = $dto->image->store('products', 'public');
+        }
+
+        $product->update($data);
+
+        return $product;
+    }
+
+    public function delete(Product $product): void
+    {
+        if ($product->image) {
+            Storage::disk('public')->delete($product->image);
+        }
+
+        $product->delete();
+    }
+
 }

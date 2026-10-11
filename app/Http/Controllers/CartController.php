@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\DTOs\CartItemData;
+use App\DTOs\CartItemDataDto;
 use App\Http\Requests\AddToCartRequest;
 use App\Http\Requests\UpdateCartRequest;
 use App\Models\Product;
@@ -45,7 +45,7 @@ class CartController extends Controller
     public function store(AddToCartRequest $request, Product $product): JsonResponse|RedirectResponse
     {
         $this->sessionCartService->add(
-            CartItemData::fromRequest($request, $product)
+            CartItemDataDto::fromRequest($request, $product)
         );
 
         return $this->respond($request);
@@ -54,7 +54,7 @@ class CartController extends Controller
     public function update(UpdateCartRequest $request, Product $product): JsonResponse|RedirectResponse
     {
         $this->sessionCartService->setQuantity(
-            CartItemData::fromRequest($request, $product)
+            CartItemDataDto::fromRequest($request, $product)
         );
 
         return $this->respond($request);

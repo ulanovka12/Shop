@@ -7,7 +7,7 @@ namespace App\DTOs;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
-final readonly class CartItemData
+final readonly class CartItemDataDto
 {
     public function __construct(
         public int $productId,

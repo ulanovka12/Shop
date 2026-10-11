@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use App\DTOs\CartItemData;
+use App\DTOs\CartItemDataDto;
 use App\Models\Product;
 
 class SessionCartService
@@ -90,7 +90,7 @@ class SessionCartService
     }
 
 
-    public function add(CartItemData $data): int
+    public function add(CartItemDataDto $data): int
     {
         $product = Product::find($data->productId);
         if (!$product) {
@@ -112,7 +112,7 @@ class SessionCartService
         return $next;
     }
 
-    public function setQuantity(CartItemData $data): int
+    public function setQuantity(CartItemDataDto $data): int
     {
         $product = Product::find($data->productId);
         if (!$product) {

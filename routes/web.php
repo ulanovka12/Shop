@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\CartController;
@@ -74,7 +75,11 @@ Route::middleware('auth')->group(function () {
             Route::get('/', [DashboardController::class, 'index'])
                 ->name('dashboard');
 
-            Route::resource('roles', RoleController::class)->except(['show']);  // ← внутри группы
+            Route::resource('roles', RoleController::class)->except(['show']);
+            Route::resource('products', AdminProductController::class)
+                ->whereNumber('product');
         });
+
+
 
 });
