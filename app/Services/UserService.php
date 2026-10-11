@@ -14,6 +14,7 @@ class UserService
     public function register(RegisterDto $dto): User
     {
         $user = new User();
+
         $user->name     = $dto->name;
         $user->email    = $dto->email;
         $user->password = Hash::make($dto->password); // см. примечание ниже
@@ -29,21 +30,20 @@ class UserService
     {
         $user ??= auth()->user();
 
-        $user->name  = $dto->name;
-        $user->email = $dto->email;
+        $user->name    = $dto->name;
+        $user->email   = $dto->email;
 
-        // Если email меняется, обычно нужно сбросить верификацию:
         if ($user->isDirty('email')) {
             $user->email_verified_at = null;
         }
 
-        // Если в DTO есть пароль и он задан
+        // Обновление пароля, если он передан
         if (! empty($dto->password)) {
             $user->password = Hash::make($dto->password);
         }
 
         if (! $user->save()) {
-            throw new \RuntimeException('save() вернул false — запись не создана');
+            throw new \RuntimeException('Не удалось сохранить профиль пользователя');
         }
 
         return $user;

@@ -140,7 +140,6 @@
         </div>
     </form>
 
-    {{-- Форма повторной отправки письма (вне основной формы) --}}
     @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
         <form id="send-verification" method="post" action="{{ route('verification.send') }}" class="hidden">
             @csrf

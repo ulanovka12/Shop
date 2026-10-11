@@ -12,6 +12,7 @@ class UpdateProfileDto
         public readonly string $name,
         public readonly string $email,
         public readonly ?string $password = null,
+        public ?string $address = null,
     ) {
     }
 
@@ -23,6 +24,7 @@ class UpdateProfileDto
             password: $request->filled('password')
                 ? $request->string('password')->toString()
                 : null,
+            address: $data['address'] ?? null,
         );
     }
 }

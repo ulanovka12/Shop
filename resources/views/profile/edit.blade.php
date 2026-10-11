@@ -37,6 +37,31 @@
                 </div>
             </div>
 
+            {{-- Адреса доставки --}}
+            <div class="bg-white overflow-hidden shadow-lg sm:rounded-2xl border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+                <div class="p-6 sm:p-8">
+                    <div class="flex items-center gap-4 mb-6 pb-6 border-b border-gray-100">
+                        <div class="flex-shrink-0">
+                            <div class="w-12 h-12 rounded-xl bg-linear-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-md">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900">Адреса доставки</h3>
+                            <p class="text-sm text-gray-500">Управляйте адресами для оформления заказов</p>
+                        </div>
+                    </div>
+                    <div class="max-w-xl">
+                        @include('profile.partials.addresses', ['user' => $user])
+                    </div>
+                </div>
+            </div>
+
             <div class="bg-white overflow-hidden shadow-lg sm:rounded-2xl border border-gray-100 hover:shadow-xl transition-shadow duration-300">
                 <div class="p-6 sm:p-8">
                     <div class="flex items-center gap-4 mb-6 pb-6 border-b border-gray-100">

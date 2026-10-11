@@ -29,6 +29,12 @@ class User extends Authenticatable
         return $this->hasMany(Address::class);
     }
 
+    public function defaultAddress(): ?\App\Models\Address
+    {
+        return $this->addresses()->where('is_default', true)->first()
+            ?? $this->addresses()->first();
+    }
+
     public function roles()
     {
         return $this->belongsToMany(Role::class);
