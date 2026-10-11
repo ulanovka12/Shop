@@ -6,12 +6,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\OrderStatusRequest;
 use App\Http\Requests\OrderStoreRequest;
+use App\Mail\OrderPlaced;
 use App\Models\Order;
 use App\Services\OrderService;
 use App\Services\SessionCartService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 
 class OrderController
@@ -36,11 +38,16 @@ class OrderController
     ): RedirectResponse {
         $user = Auth::user();
 
-        $service->createOrder(
+        // 1. Сохраняем результат в $order
+        $order = $service->createOrder(
             $user,
             $request->validated()['payment_method'],
             $cart
         );
+
+        // 2. Ставим письмо в очередь
+        Mail::to(config('mail.admin_address'))
+            ->queue(new OrderPlaced($order));
 
         return redirect()
             ->route('orders.index')
@@ -71,7 +78,4 @@ class OrderController
             ->route('orders.index')
             ->with('success', $message);
     }
-
-
-
 }

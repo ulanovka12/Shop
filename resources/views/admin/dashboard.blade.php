@@ -162,7 +162,7 @@
 
                             <div class="flex-1 min-w-0">
                                 <h3 class="font-semibold text-gray-900 group-hover:text-indigo-600 transition-colors">
-                                    Компьютеры
+                                    Категории
                                 </h3>
                                 <p class="text-sm text-gray-500 mt-1">
                                     Управление каталогом
