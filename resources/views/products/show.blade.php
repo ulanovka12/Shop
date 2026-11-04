@@ -41,7 +41,7 @@
 
                         <div class="relative w-full max-w-md">
                             @if($product->image)
-                                <img src="{{ asset('storage/' . $product->image) }}"
+                                <img src="{{ Str::startsWith($product->image, 'http') ? $product->image : asset('storage/' . $product->image) }}"
                                      alt="{{ $product->name }}"
                                      class="w-full h-auto rounded-2xl shadow-2xl ring-1 ring-white/20">
                             @else

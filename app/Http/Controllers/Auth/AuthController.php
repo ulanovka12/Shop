@@ -14,6 +14,8 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Jobs\SendWelcomeAfterVerificationJob;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 class AuthController extends Controller
 {
@@ -62,5 +64,23 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         return redirect()->route('login.form');
+    }
+
+    public function verifyEmail(EmailVerificationRequest $request): RedirectResponse
+    {
+        if ($request->user()->hasVerifiedEmail()) {
+            return redirect()->route('login.form')->with('status', 'Email уже подтвержден');
+        }
+
+        // Помечаем email как подтвержденный
+        // Метод вернет true, если подтверждение произошло только что
+        if ($request->user()->markEmailAsVerified()) {
+            event(new \Illuminate\Auth\Events\Verified($request->user()));
+
+            // ОТПРАВЛЯЕМ ЗАДАЧУ В RABBITMQ (Producer)
+            SendWelcomeAfterVerificationJob::dispatch($request->user()->id);
+        }
+
+        return redirect()->route('login.form')->with('status', 'Email успешно подтвержден!');
     }
 }

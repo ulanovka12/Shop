@@ -6,6 +6,8 @@ COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
+# ... начало файла без изменений ...
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
         libicu-dev \
         libpq-dev \
@@ -23,6 +25,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         zip \
         bcmath \
         gd \
+        sockets \
     && if [ "$INSTALL_XDEBUG" = "1" ]; then install-php-extensions xdebug; fi \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/pear

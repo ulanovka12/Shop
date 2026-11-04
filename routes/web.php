@@ -13,6 +13,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 Route::middleware('guest')->group(function () {
     // registration
@@ -88,6 +89,15 @@ Route::middleware('auth')->group(function () {
                 ->whereNumber('product');
         });
 
+    //Страница с просьбой проверить почту!
+    Route::get('/email/verify', function () {
+        return view('auth.verify-email'); // Вам нужно будет создать этот view
+    })->middleware('auth')->name('verification.notice');
+
+    //Обработка ссылки из письма (тут мы и вызовем наш Producer)
+    Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])
+        ->middleware(['auth', 'signed'])
+        ->name('verification.verify');
 
 
 });

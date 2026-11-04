@@ -3,6 +3,19 @@
 declare(strict_types=1);
 
 return [
+    'rabbitmq' => [
+        'driver' => 'rabbitmq',
+        'queue' => env('RABBITMQ_QUEUE', 'default'),
+        'hosts' => [
+            [
+                'host' => env('RABBITMQ_HOST', 'rabbitmq'),
+                'port' => 5672,
+                'user' => env('RABBITMQ_USER', 'guest'),
+                'password' => env('RABBITMQ_PASSWORD', 'guest'),
+                'vhost' => '/',
+            ],
+        ],
+    ],
 
     /*
     |--------------------------------------------------------------------------

@@ -7,6 +7,7 @@ namespace App\Services;
 use App\DTOs\RegisterDto;
 use App\DTOs\UpdateProfileDto;
 use App\Models\User;
+use App\Jobs\SendRegistrationVerificationJob;
 use Illuminate\Support\Facades\Hash;
 
 class UserService
@@ -17,11 +18,15 @@ class UserService
 
         $user->name     = $dto->name;
         $user->email    = $dto->email;
-        $user->password = Hash::make($dto->password); // см. примечание ниже
+        $user->password = Hash::make($dto->password);
 
         if (!$user->save()) {
             throw new \RuntimeException('save() вернул false — запись не создана');
         }
+
+        // 2. Отправляем задачу в RabbitMQ
+        // Важно: мы делаем это ТОЛЬКО после успешного $user->save()
+        SendRegistrationVerificationJob::dispatch($user->id);
 
         return $user;
     }
