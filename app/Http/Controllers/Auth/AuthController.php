@@ -83,4 +83,20 @@ class AuthController extends Controller
 
         return redirect()->route('login.form')->with('status', 'Email успешно подтвержден!');
     }
+
+    /**
+     * Повторная отправка письма для подтверждения email
+     */
+    public function resendVerification(Request $request): RedirectResponse
+    {
+        // Если почта уже подтверждена, просто возвращаем назад
+        if ($request->user()->hasVerifiedEmail()) {
+            return redirect()->route('profile.edit')->with('status', 'Email уже подтвержден.');
+        }
+
+        // Отправляем задачу в RabbitMQ (используем ту же джобу, что и при регистрации)
+        \App\Jobs\SendRegistrationVerificationJob::dispatch($request->user()->id);
+
+        return redirect()->route('profile.edit')->with('status', 'Ссылка для подтверждения отправлена на почту!');
+    }
 }

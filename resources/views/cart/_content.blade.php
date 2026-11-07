@@ -165,17 +165,19 @@
                                     <span class="text-sm text-gray-700">Наличными при получении</span>
                                 </label>
 
-                                <label class="flex items-center gap-3 p-3 rounded-xl border border-gray-200
-                              hover:border-indigo-300 hover:bg-indigo-50/50
-                              cursor-pointer transition-colors">
+                                <label class="flex items-start gap-3 p-3 rounded-xl border border-gray-200
+              hover:border-indigo-300 hover:bg-indigo-50/50
+              cursor-pointer transition-colors">
                                     <input type="radio"
                                            name="payment_method"
-                                           value="card"
-                                           class="text-indigo-600 focus:ring-indigo-500"
-                                        @checked(old('payment_method') === 'card')>
-                                    <span class="text-sm text-gray-700">Картой при получении</span>
+                                           value="yookassa"
+                                           class="mt-1 text-indigo-600 focus:ring-indigo-500"
+                                        @checked(old('payment_method') === 'yookassa')>
+                                    <div>
+                                        <span class="block text-sm font-medium text-gray-900">Онлайн через YooKassa</span>
+                                        <span class="block text-xs text-gray-500 mt-1">карта, СБП, SberPay, T-Pay, Alfa Pay</span>
+                                    </div>
                                 </label>
-                            </div>
 
                             <button type="submit"
                                     class="mt-5 w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl

@@ -112,94 +112,89 @@
             {{-- Быстрые ссылки --}}
             <div>
                 <h2 class="text-lg font-semibold text-gray-900 mb-4">Управление</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
 
+                    <!-- 1. Платежи YooKassa -->
+                    <a href="{{ route('admin.payments.index') }}"
+                       class="group relative bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 p-6 overflow-hidden">
+                        <div class="h-1.5 w-full absolute top-0 left-0 bg-gradient-to-r from-indigo-500 to-purple-500"></div>
+                        <div class="flex items-start gap-4">
+                            <div class="shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-50 to-indigo-100 flex items-center justify-center group-hover:from-indigo-500 group-hover:to-purple-500 transition-colors duration-300">
+                                <svg class="w-6 h-6 text-indigo-600 group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+                                </svg>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="font-semibold text-gray-900 group-hover:text-indigo-600 transition-colors">Платежи</h3>
+                                <p class="text-sm text-gray-500 mt-1">История транзакций</p>
+                            </div>
+                            <div class="shrink-0 text-gray-300 group-hover:text-indigo-500 group-hover:translate-x-1 transition-all duration-300">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- 2. Роли -->
                     <a href="{{ route('admin.roles.index') }}"
                        class="group relative bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 p-6 overflow-hidden">
                         <div class="h-1.5 w-full absolute top-0 left-0 bg-gradient-to-r from-indigo-500 to-purple-500"></div>
-
                         <div class="flex items-start gap-4">
-                            <div class="shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-50 to-indigo-100 flex items-center justify-center
-                                        group-hover:from-indigo-500 group-hover:to-purple-500 transition-colors duration-300">
-                                <svg class="w-6 h-6 text-indigo-600 group-hover:text-white transition-colors duration-300"
-                                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                          d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                            <div class="shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-50 to-indigo-100 flex items-center justify-center group-hover:from-indigo-500 group-hover:to-purple-500 transition-colors duration-300">
+                                <svg class="w-6 h-6 text-indigo-600 group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
                                 </svg>
                             </div>
-
                             <div class="flex-1 min-w-0">
-                                <h3 class="font-semibold text-gray-900 group-hover:text-indigo-600 transition-colors">
-                                    Роли
-                                </h3>
-                                <p class="text-sm text-gray-500 mt-1">
-                                    Управление ролями пользователей
-                                </p>
+                                <h3 class="font-semibold text-gray-900 group-hover:text-indigo-600 transition-colors">Роли</h3>
+                                <p class="text-sm text-gray-500 mt-1">Управление доступами</p>
                             </div>
-
                             <div class="shrink-0 text-gray-300 group-hover:text-indigo-500 group-hover:translate-x-1 transition-all duration-300">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                          d="M9 5l7 7-7 7"/>
-                                </svg>
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                             </div>
                         </div>
                     </a>
 
+                    <!-- 3. Категории -->
                     <a href="{{ route('admin.products.index') }}"
                        class="group relative bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 p-6 overflow-hidden">
                         <div class="h-1.5 w-full absolute top-0 left-0 bg-gradient-to-r from-indigo-500 to-purple-500"></div>
-
                         <div class="flex items-start gap-4">
-                            <div class="shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-50 to-indigo-100 flex items-center justify-center
-                                        group-hover:from-indigo-500 group-hover:to-purple-500 transition-colors duration-300">
-                                <svg class="w-6 h-6 text-indigo-600 group-hover:text-white transition-colors duration-300"
-                                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                          d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                            <div class="shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-50 to-indigo-100 flex items-center justify-center group-hover:from-indigo-500 group-hover:to-purple-500 transition-colors duration-300">
+                                <svg class="w-6 h-6 text-indigo-600 group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
                                 </svg>
                             </div>
-
                             <div class="flex-1 min-w-0">
-                                <h3 class="font-semibold text-gray-900 group-hover:text-indigo-600 transition-colors">
-                                    Категории
-                                </h3>
-                                <p class="text-sm text-gray-500 mt-1">
-                                    Управление каталогом
-                                </p>
+                                <h3 class="font-semibold text-gray-900 group-hover:text-indigo-600 transition-colors">Категории</h3>
+                                <p class="text-sm text-gray-500 mt-1">Управление каталогом</p>
                             </div>
-
                             <div class="shrink-0 text-gray-300 group-hover:text-indigo-500 group-hover:translate-x-1 transition-all duration-300">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                          d="M9 5l7 7-7 7"/>
-                                </svg>
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                             </div>
                         </div>
                     </a>
 
+                    <!-- 4. Создание товаров -->
                     <a href="{{ route('admin.products.create') }}"
                        class="group relative bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 p-6 overflow-hidden">
                         <div class="h-1.5 w-full absolute top-0 left-0 bg-gradient-to-r from-indigo-500 to-purple-500"></div>
-
                         <div class="flex items-start gap-4">
-                            <div class="shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-50 to-indigo-100 flex items-center justify-center
-                                        group-hover:from-indigo-500 group-hover:to-purple-500 transition-colors duration-300">
-                                <svg class="w-6 h-6 text-indigo-600 group-hover:text-white transition-colors duration-300"
-                                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                          d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                            <div class="shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-50 to-indigo-100 flex items-center justify-center group-hover:from-indigo-500 group-hover:to-purple-500 transition-colors duration-300">
+                                <svg class="w-6 h-6 text-indigo-600 group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                                 </svg>
                             </div>
-
                             <div class="flex-1 min-w-0">
-                                <h3 class="font-semibold text-gray-900 group-hover:text-indigo-600 transition-colors">
-                                    Создание товаров
-                                </h3>
-                                <p class="text-sm text-gray-500 mt-1">
-                                    Новые товары
-                                </p>
+                                <h3 class="font-semibold text-gray-900 group-hover:text-indigo-600 transition-colors">Создать товар</h3>
+                                <p class="text-sm text-gray-500 mt-1">Добавление в каталог</p>
                             </div>
+                            <div class="shrink-0 text-gray-300 group-hover:text-indigo-500 group-hover:translate-x-1 transition-all duration-300">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
 
                             <div class="shrink-0 text-gray-300 group-hover:text-indigo-500 group-hover:translate-x-1 transition-all duration-300">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -208,13 +203,5 @@
                                 </svg>
                             </div>
                         </div>
-                    </a>
-
-
-
                 </div>
-            </div>
-
-        </div>
-    </div>
 </x-app-layout>

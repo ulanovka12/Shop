@@ -6,6 +6,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Order extends Model
 {
@@ -23,12 +25,18 @@ class Order extends Model
         self::STATUS_CANCELED => 'Отменен',
     ];
 
+    // 1. Обновляем способы оплаты по инструкции
     public const PAYMENT_METHOD_CASH = 'cash';
-    public const PAYMENT_METHOD_CARD = 'card';
+    public const PAYMENT_METHOD_YOOKASSA = 'yookassa';
+
+    public const PAYMENT_METHODS = [
+        self::PAYMENT_METHOD_CASH,
+        self::PAYMENT_METHOD_YOOKASSA,
+    ];
 
     public const PAYMENT_METHOD_LABELS = [
         self::PAYMENT_METHOD_CASH => 'Наличными при получении',
-        self::PAYMENT_METHOD_CARD => 'Картой при получении',
+        self::PAYMENT_METHOD_YOOKASSA => 'Онлайн-оплата (ЮKassa)',
     ];
 
     protected $fillable = [
@@ -40,11 +48,26 @@ class Order extends Model
         'shipping_address'
     ];
 
+    public function user(): BelongsTo // <-- Добавьте этот метод
+    {
+        return $this->belongsTo(User::class);
+    }
     public function items(): HasMany
     {
         return $this->hasMany(OrderItem::class);
     }
 
+    // 2. Добавляем связи с платежами
+    public function payments(): HasMany
+    {
+        return $this->hasMany(OrderPayment::class);
+    }
+
+    // Связь для получения самой последней попытки оплаты
+    public function latestPayment(): HasOne
+    {
+        return $this->hasOne(OrderPayment::class)->latestOfMany();
+    }
 
     public function getStatusLabelAttribute(): string
     {

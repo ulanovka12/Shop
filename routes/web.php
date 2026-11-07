@@ -13,7 +13,9 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\YooKassaController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use App\Http\Controllers\Admin\PaymentController;
 
 Route::middleware('guest')->group(function () {
     // registration
@@ -39,6 +41,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'updateProfile'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::post('/email/verification-notification', [AuthController::class, 'resendVerification'])
+        ->middleware(['auth', 'throttle:6,1'])
+        ->name('verification.send');
 
     //Address
     Route::post('/addresses', [AddressController::class, 'store'])     ->name('addresses.store');
@@ -77,17 +82,29 @@ Route::middleware('auth')->group(function () {
 
 
     //Admin
-    Route::middleware(['auth', 'role:admin'])
-        ->prefix('admin')
-        ->name('admin.')
-        ->group(function () {
-            Route::get('/', [DashboardController::class, 'index'])
-                ->name('dashboard');
+    // 1. Дашборд
+    Route::get('/admin', [DashboardController::class, 'index'])
+        ->middleware(['auth', 'role:admin'])
+        ->name('admin.dashboard');
 
-            Route::resource('roles', RoleController::class)->except(['show']);
-            Route::resource('products', AdminProductController::class)
-                ->whereNumber('product');
-        });
+    // 2. Платежи
+    Route::get('/admin/payments', [PaymentController::class, 'index'])
+        ->middleware(['auth', 'role:admin'])
+        ->name('admin.payments.index');
+
+    // 3. Роли (Resource)
+    Route::resource('/admin/roles', RoleController::class)
+        ->except(['show'])
+        ->middleware(['auth', 'role:admin'])
+        ->names('admin.roles'); // Указываем префикс для имен роутов вручную
+
+    // 4. Товары (Resource)
+    Route::resource('/admin/products', AdminProductController::class)
+        ->whereNumber('product')
+        ->middleware(['auth', 'role:admin'])
+        ->names('admin.products'); // Указываем префикс для имен роутов вручную
+    // 5. История Платежных попыток для пользователя
+    Route::get('/orders/{order}/payments', [OrderController::class, 'paymentHistory'])->name('orders.payments');
 
     //Страница с просьбой проверить почту!
     Route::get('/email/verify', function () {
@@ -99,5 +116,19 @@ Route::middleware('auth')->group(function () {
         ->middleware(['auth', 'signed'])
         ->name('verification.verify');
 
+    // 1. Создание платежа (когда пользователь нажимает "Оплатить картой")
+    Route::post('/payments/yookassa/create/{order}', [YooKassaController::class, 'create'])
+        ->middleware('auth')
+        ->name('payments.yookassa.create');
 
+    // 2. Webhook (сюда ЮKassa будет присылать уведомления об оплате)
+    Route::post('/payments/yookassa/webhook', [YooKassaController::class, 'webhook'])
+        ->name('payments.yookassa.webhook');
+
+    // 3. Return URL (сюда ЮKassa вернет пользователя после оплаты)
+    Route::get('/payments/yookassa/return/{order}', [YooKassaController::class, 'return'])
+        ->middleware('auth')
+        ->name('payments.yookassa.return');
+
+    Route::post('/orders/{order}/pay', [OrderController::class, 'pay'])->name('orders.pay');
 });

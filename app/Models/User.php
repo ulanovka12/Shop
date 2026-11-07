@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 #[Fillable(['name', 'email', 'password'])]
 #[Hidden(['password', 'remember_token'])]
@@ -17,6 +18,7 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory;
     use Notifiable;
+    use HasRoles;
     protected function casts(): array
     {
         return [
@@ -34,19 +36,5 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->addresses()->where('is_default', true)->first()
             ?? $this->addresses()->first();
-    }
-
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class);
-    }
-    public function hasRole(string $role): bool
-    {
-        return $this->roles()->where('slug', $role)->exists();
-    }
-
-    public function hasAnyRole(array $roles): bool
-    {
-        return $this->roles()->whereIn('slug', $roles)->exists();
     }
 }

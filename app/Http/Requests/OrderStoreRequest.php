@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Requests;
 
+use App\Models\Order; // <-- Импорт модели
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rule; // <-- Импорт Rule
 
 class OrderStoreRequest extends FormRequest
 {
@@ -17,8 +18,11 @@ class OrderStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'payment_method' => ['required', Rule::in(['cash', 'card'])],
-            // 'address_id'   => ['required', Rule::exists('addresses', 'id')->where('user_id', auth()->id())], // добавьте, если в форме есть выбор адреса
+            'payment_method' => [
+                'required',
+                'string',
+                Rule::in(Order::PAYMENT_METHODS),//константа из модельки
+            ],
         ];
     }
 }
