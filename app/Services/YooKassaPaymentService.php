@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 use YooKassa\Client;
 use YooKassa\Model\PaymentInterface;
 use Exception;
+use YooKassa\Request\Payments\PaymentResponse;
 
 class YooKassaPaymentService
 {
@@ -102,17 +103,26 @@ class YooKassaPaymentService
         }
     }
 
-    public function fetchPayment(string $paymentId): ?PaymentInterface
+    public function fetchPayment(string $paymentId): PaymentResponse
     {
         try {
             return $this->client->getPaymentInfo($paymentId);
-        } catch (Exception $e) {
-            Log::error("Не удалось получить платеж из YooKassa: {$paymentId}");
-            return null;
+
+        } catch (\Throwable $e) {
+
+            Log::error("Не удалось получить платеж из YooKassa: {$paymentId}", [
+                'error' => $e->getMessage(),
+            ]);
+
+            throw new \RuntimeException(
+                "Не удалось получить платеж из YooKassa: {$paymentId}",
+                0,
+                $e
+            );
         }
     }
 
-    public function synchronizePayment(PaymentInterface $paymentData): void
+    public function synchronizePayment(PaymentResponse $paymentData)
     {
         $localPayment = OrderPayment::where('external_payment_id', $paymentData->getId())->first();
         if (!$localPayment) {
