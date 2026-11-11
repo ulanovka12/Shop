@@ -13,6 +13,7 @@ use YooKassa\Client;
 use YooKassa\Model\PaymentInterface;
 use Exception;
 use YooKassa\Request\Payments\PaymentResponse;
+use YooKassa\Common\Exceptions\NotFoundException;
 
 class YooKassaPaymentService
 {
@@ -105,17 +106,28 @@ class YooKassaPaymentService
 
     public function fetchPayment(string $paymentId): PaymentResponse
     {
+        if ($paymentId === '') {
+            throw new \InvalidArgumentException('payment_id is empty');
+        }
+
         try {
             return $this->client->getPaymentInfo($paymentId);
-
+        } catch (NotFoundException $e) {
+            Log::warning('YooKassa: платёж не найден в текущем магазине', [
+                'payment_id' => $paymentId,
+                'shop_id'    => config('services.yookassa.shop_id'),
+            ]);
+            throw new \RuntimeException(
+                "Платёж {$paymentId} не найден в текущем магазине YooKassa",
+                0,
+                $e
+            );
         } catch (\Throwable $e) {
-
-            Log::error("Не удалось получить платеж из YooKassa: {$paymentId}", [
+            Log::error("Не удалось получить платёж из YooKassa: {$paymentId}", [
                 'error' => $e->getMessage(),
             ]);
-
             throw new \RuntimeException(
-                "Не удалось получить платеж из YooKassa: {$paymentId}",
+                "Не удалось получить платёж из YooKassa: {$paymentId}",
                 0,
                 $e
             );

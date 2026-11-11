@@ -13,18 +13,28 @@ use Illuminate\Support\Facades\Log;
 
 class YooKassaController extends Controller
 {
-    // 1. Метод return()
+
     public function return(Order $order, YooKassaPaymentService $yooKassaService): RedirectResponse
     {
         // Берем последнюю попытку оплаты
         $latestPayment = $order->latestPayment;
 
         if ($latestPayment && $latestPayment->external_payment_id) {
-            // Идем в API и проверяем реальный статус
-            $actualPayment = $yooKassaService->fetchPayment($latestPayment->external_payment_id);
+            try {
+                // Идем в API и проверяем реальный статус
+                $actualPayment = $yooKassaService->fetchPayment($latestPayment->external_payment_id);
 
-            if ($actualPayment) {
-                $yooKassaService->synchronizePayment($actualPayment);
+                if ($actualPayment) {
+                    $yooKassaService->synchronizePayment($actualPayment);
+                }
+            } catch (\Throwable $e) {
+                // Платёж не найден в YooKassa, сеть недоступна и т.п. —
+                // не роняем страницу 500-й, а просто логируем
+                Log::warning('YooKassa return: не удалось проверить платёж', [
+                    'order_id'            => $order->id,
+                    'external_payment_id' => $latestPayment->external_payment_id,
+                    'error'               => $e->getMessage(),
+                ]);
             }
         }
 
@@ -41,8 +51,17 @@ class YooKassaController extends Controller
     // 2. Метод webhook()
     public function webhook(Request $request, YooKassaPaymentService $yooKassaService): JsonResponse
     {
-        // Сервис сам достанет payment_id, запросит API и обновит заказ
-        $yooKassaService->handleWebhook($request->all());
+        try {
+            // Сервис сам достанет payment_id, запросит API и обновит заказ
+            $yooKassaService->handleWebhook($request->all());
+        } catch (\Throwable $e) {
+            // YooKassa будет ретраить, если ответ не 200 — но нам не нужно,
+            // чтобы падал весь webhook из-за одной ошибки
+            Log::error('YooKassa webhook: ошибка обработки', [
+                'error' => $e->getMessage(),
+                'payload' => $request->all(),
+            ]);
+        }
 
         // Всегда отвечаем 200 OK
         return response()->json(['status' => 'success']);

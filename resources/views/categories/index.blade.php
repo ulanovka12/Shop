@@ -57,6 +57,8 @@
                                     </p>
                                 </div>
 
+
+
                                 <div class="shrink-0 text-gray-300 group-hover:text-indigo-500 transition-all duration-300 group-hover:translate-x-1">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
