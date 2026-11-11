@@ -45,5 +45,41 @@ services:
             - "5672:5672"
             - "15672:15672"
 
+    scheduler:
+        build: ./docker/docker_php
+        user: "${UID:-1000}:${GID:-1000}"
+        userns_mode: "keep-id"
+        environment:
+            XDG_CONFIG_HOME: /tmp
+        working_dir: /var/www/html
+        command: php artisan schedule:work
+        restart: always
+        volumes:
+            - .:/var/www/html
+        depends_on:
+            - php-fpm
+            - postgres
+            - rabbitmq
+
+    reports-worker:
+        build: ./docker/docker_php
+        user: "${UID:-1000}:${GID:-1000}"
+        userns_mode: "keep-id"
+        environment:
+            XDG_CONFIG_HOME: /tmp
+        working_dir: /var/www/html
+        command: >
+            php artisan queue:work rabbitmq
+            --queue=orders.reports.sales
+            --tries=3
+            --sleep=2
+        restart: always
+        volumes:
+            - .:/var/www/html
+        depends_on:
+            - php-fpm
+            - rabbitmq
+
+
 volumes:
     postgres_data:

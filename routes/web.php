@@ -131,4 +131,7 @@ Route::middleware('auth')->group(function () {
         ->name('payments.yookassa.return');
 
     Route::post('/orders/{order}/pay', [OrderController::class, 'pay'])->name('orders.pay');
+
+
+
 });

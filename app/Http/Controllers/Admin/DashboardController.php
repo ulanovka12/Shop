@@ -12,9 +12,8 @@ class DashboardController extends Controller
 {
     public function index(SalesReportService $salesReportService): View
     {
-        // Просто просит сервис выдать готовый массив и передает его в шаблон.
         return view('admin.dashboard', [
-            'report' => $salesReportService->getLastWeekReport(),
+            'report' => $salesReportService->getDashboardReport(),
         ]);
     }
 }
