@@ -17,6 +17,7 @@ services:
         environment:
             XDG_CONFIG_HOME: /tmp
         restart: always
+#        working_dir: /var/www/html
         volumes:
             - .:/var/www/html
             - ./docker/docker_php/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-xdebug.ini

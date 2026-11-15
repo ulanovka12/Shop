@@ -1,0 +1,181 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Call to method validated\(\) on an unknown class App\\Http\\Requests\\ProductListRequest\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/DTOs/ProductListDto.php
+
+		-
+			message: '#^Parameter \$request of method App\\DTOs\\ProductListDto\:\:fromRequest\(\) has invalid type App\\Http\\Requests\\ProductListRequest\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/DTOs/ProductListDto.php
+
+		-
+			message: '#^Variable \$data on left side of \?\? is never defined\.$#'
+			identifier: nullCoalesce.variable
+			count: 1
+			path: app/DTOs/UpdateProfileDto.php
+
+		-
+			message: '#^Property App\\Http\\Controllers\\CategoryController\:\:\$productService is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: app/Http/Controllers/CategoryController.php
+
+		-
+			message: '#^Access to an undefined property LoginController\:\:\$userService\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/LoginController.php
+
+		-
+			message: '#^Call to static method fromRequest\(\) on an unknown class loginDTO\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Http/Controllers/LoginController.php
+
+		-
+			message: '#^Parameter \$request of method LoginController\:\:store\(\) has invalid type App\\Http\\Requests\\Auth\\LoginRequest\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Http/Controllers/LoginController.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Controllers\\RegisterController\:\:\$userService\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/RegisterController.php
+
+		-
+			message: '#^Parameter \#1 \$request of static method App\\DTOs\\RegisterDto\:\:fromRequest\(\) expects App\\Http\\Requests\\RegisterRequest, App\\Http\\Requests\\Auth\\RegisterRequest given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/RegisterController.php
+
+		-
+			message: '#^Parameter \$request of method App\\Http\\Controllers\\RegisterController\:\:store\(\) has invalid type App\\Http\\Requests\\Auth\\RegisterRequest\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Http/Controllers/RegisterController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$external_payment_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/YooKassaController.php
+
+		-
+			message: '#^If condition is always true\.$#'
+			identifier: if.alwaysTrue
+			count: 1
+			path: app/Http/Controllers/YooKassaController.php
+
+		-
+			message: '#^Instantiated class App\\Mail\\Content not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Mail/ReceiptFailedNotification.php
+
+		-
+			message: '#^Method App\\Mail\\ReceiptFailedNotification\:\:content\(\) has invalid return type App\\Mail\\Content\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Mail/ReceiptFailedNotification.php
+
+		-
+			message: '#^Parameter \#1 \$view of method Illuminate\\Mail\\Mailable\:\:view\(\) expects view\-string, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Mail/ReceiptFailedNotification.php
+
+		-
+			message: '#^Method App\\Models\\User\:\:defaultAddress\(\) should return App\\Models\\Address\|null but returns Illuminate\\Database\\Eloquent\\Model\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Models/User.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$full_address\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/OrderService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/OrderService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$product_id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Services/OrderService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$quantity\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Services/OrderService.php
+
+		-
+			message: '#^Relation ''category'' is not found in App\\Models\\Product model\.$#'
+			identifier: larastan.relationExistence
+			count: 1
+			path: app/Services/ProductService.php
+
+		-
+			message: '#^Call to static method withMessages\(\) on an unknown class App\\Services\\ValidationException\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Services/UserService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$email\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/YooKassaPaymentService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$price\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/YooKassaPaymentService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$quantity\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/YooKassaPaymentService.php
+
+		-
+			message: '#^If condition is always true\.$#'
+			identifier: if.alwaysTrue
+			count: 1
+			path: app/Services/YooKassaPaymentService.php
+
+		-
+			message: '#^Method App\\Services\\YooKassaPaymentService\:\:fetchPayment\(\) should return YooKassa\\Request\\Payments\\PaymentResponse but returns YooKassa\\Model\\Payment\\PaymentInterface\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Services/YooKassaPaymentService.php
+
+		-
+			message: '#^Parameter \#1 \$order of method App\\Services\\OrderService\:\:markAsPaid\(\) expects App\\Models\\Order, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Services/YooKassaPaymentService.php
+
+		-
+			message: '#^Parameter \#1 \$receipt of job class App\\Jobs\\NotifyManagerFailedReceiptJob constructor expects App\\Models\\PaymentReceipt in App\\Jobs\\NotifyManagerFailedReceiptJob\:\:dispatch\(\), Illuminate\\Database\\Eloquent\\Model given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Services/YooKassaPaymentService.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>email" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Services/YooKassaPaymentService.php

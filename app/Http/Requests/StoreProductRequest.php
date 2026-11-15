@@ -17,13 +17,15 @@ class StoreProductRequest extends FormRequest
     {
         return [
             'name'        => ['required', 'string', 'max:255'],
-            'price'       => ['required', 'numeric', 'min:0'],
+            'price'       => ['required', 'numeric', 'min:0', 'max:99999.99'],
             'stock'       => ['required', 'integer', 'min:0'],
             'sku'         => ['required', 'string', 'unique:products,sku'],
             'is_active' => ['boolean'],
             'image'       => ['nullable', 'image', 'max:2048'],
             'category_id' => ['nullable', 'exists:categories,id'],
             'description' => ['nullable', 'string'],
+
+
         ];
     }
 }

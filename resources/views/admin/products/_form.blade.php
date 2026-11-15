@@ -20,6 +20,7 @@
     <input type="number"
            step="0.01"
            min="0"
+           max="99999.99"
            name="price"
            id="price"
            class="w-full rounded-xl border-gray-300 focus:border-indigo-500 focus:ring-indigo-500

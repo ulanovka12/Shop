@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Spatie\Permission\Models\Role as SpatieRole;
 
-class Role extends Model
+class Role extends SpatieRole
 {
     use HasFactory;
 
@@ -19,7 +19,7 @@ class Role extends Model
     protected $fillable = [
         'name',
         'slug',
-
+        'guard_name',
     ];
 
     public function users(): BelongsToMany

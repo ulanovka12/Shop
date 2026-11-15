@@ -84,24 +84,24 @@ Route::middleware('auth')->group(function () {
     //Admin
     // 1. Дашборд
     Route::get('/admin', [DashboardController::class, 'index'])
-        ->middleware(['auth', 'role:admin'])
+        ->middleware(['auth', 'role:Admin'])
         ->name('admin.dashboard');
 
     // 2. Платежи
     Route::get('/admin/payments', [PaymentController::class, 'index'])
-        ->middleware(['auth', 'role:admin'])
+        ->middleware(['auth', 'role:Admin'])
         ->name('admin.payments.index');
 
     // 3. Роли (Resource)
     Route::resource('/admin/roles', RoleController::class)
         ->except(['show'])
-        ->middleware(['auth', 'role:admin'])
+        ->middleware(['auth', 'role:Admin'])
         ->names('admin.roles'); // Указываем префикс для имен роутов вручную
 
     // 4. Товары (Resource)
     Route::resource('/admin/products', AdminProductController::class)
         ->whereNumber('product')
-        ->middleware(['auth', 'role:admin'])
+        ->middleware(['auth', 'role:Admin'])
         ->names('admin.products'); // Указываем префикс для имен роутов вручную
     // 5. История Платежных попыток для пользователя
     Route::get('/orders/{order}/payments', [OrderController::class, 'paymentHistory'])->name('orders.payments');
