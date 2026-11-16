@@ -44,6 +44,7 @@
     "scripts": {
         "csfix": "php-cs-fixer fix",
         "cschk": "php-cs-fixer fix --dry-run --diff",
+        "analyse": "phpstan analyse",
         "setup": [
             "composer install",
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
