@@ -35,7 +35,7 @@ class SessionCartService
         session()->put(self::SESSION_KEY, $raw);
     }
 
-    private function removeById(int $productId): void   // ← добавлено
+    private function removeById(int $productId): void
     {
         $raw = $this->getRaw();
         unset($raw[$productId]);
@@ -53,6 +53,7 @@ class SessionCartService
             ->keyBy('id');
 
         $items = [];
+
         foreach ($raw as $productId => $quantity) {
             $product = $products->get((int) $productId);
             if (!$product) {

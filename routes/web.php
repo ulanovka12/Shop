@@ -65,11 +65,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/categories/{category:slug}', [CategoryController::class, 'show'])
         ->name('categories.show');
 
-    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-    Route::post('/cart/items/{product}', [CartController::class, 'store'])->name('cart.items.store');
-    Route::patch('/cart/items/{product}', [CartController::class, 'update'])->name('cart.items.update');
-    Route::delete('/cart/items/{product}', [CartController::class, 'destroy'])->name('cart.items.destroy');
-    Route::delete('/cart', [CartController::class, 'clear'])->name('cart.clear');
+
+    Route::middleware('auth')->group(function () {
+        // CART
+        Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+        Route::post('/cart/items/{product}', [CartController::class, 'store'])->name('cart.items.store');
+        Route::patch('/cart/items/{product}', [CartController::class, 'update'])->name('cart.items.update');
+        Route::delete('/cart/items/{product}', [CartController::class, 'destroy'])->name('cart.items.destroy');
+        Route::delete('/cart', [CartController::class, 'clear'])->name('cart.clear');
+    });
 
     //Orders
     Route::middleware('auth')->group(function () {
