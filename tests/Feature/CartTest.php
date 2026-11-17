@@ -22,7 +22,7 @@ class CartTest extends TestCase
         ]);
 
         // Assert
-        // Проверяем, что гостя перенаправило на страницу входа
+        // Проверяю, что гостя перенаправило на страницу входа
         $response->assertRedirect('/login');
     }
 
@@ -42,9 +42,7 @@ class CartTest extends TestCase
         // 1. Проверяем, что запрос прошел успешно (редирект назад или JSON)
         $response->assertStatus(302);
 
-        // 2. Проверяем, что данные появились в сессии
-        // ВАЖНО: Вам нужно заглянуть в ваш SessionCartService, чтобы узнать,
-        // под каким ключом он сохраняет корзину (например, 'cart' или 'shopping_cart')
+        // 2. Проверяю, что данные появились в сессии
 
         $this->assertTrue(session()->has('cart'));
 

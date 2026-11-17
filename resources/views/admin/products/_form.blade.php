@@ -1,6 +1,4 @@
 
-
-{{-- Название --}}
 <div class="mb-4">
     <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Название</label>
     <input type="text"
@@ -14,13 +12,13 @@
     @enderror
 </div>
 
-{{-- Цена --}}
+
 <div class="mb-4">
     <label for="price" class="block text-sm font-medium text-gray-700 mb-1">Цена</label>
     <input type="number"
            step="0.01"
            min="0"
-           max="99999.99"
+           max="9999999.99"
            name="price"
            id="price"
            class="w-full rounded-xl border-gray-300 focus:border-indigo-500 focus:ring-indigo-500
@@ -46,7 +44,7 @@
     @enderror
 </div>
 
-{{-- SKU --}}
+
 <div class="mb-4">
     <label for="sku" class="block text-sm font-medium text-gray-700 mb-1">SKU (артикул)</label>
     <input type="text"
@@ -73,9 +71,7 @@
     @enderror
 </div>
 
-{{-- Активен (boolean is_active) --}}
 <div class="mb-4">
-    {{-- Скрытое поле нужно: если чекбокс не отмечен, браузер не отправит ничего --}}
     <input type="hidden" name="is_active" value="0">
 
     <label class="inline-flex items-center gap-2">
@@ -91,7 +87,7 @@
     @enderror
 </div>
 
-{{-- Изображение --}}
+
 <div class="mb-6">
     <label for="image" class="block text-sm font-medium text-gray-700 mb-1">Изображение</label>
     <input type="file"
@@ -117,7 +113,7 @@
     @endisset
 </div>
 
-{{-- Кнопки --}}
+
 <div class="flex items-center gap-3">
     <button type="submit"
             class="px-5 py-2.5 rounded-xl bg-indigo-600 text-white text-sm font-semibold

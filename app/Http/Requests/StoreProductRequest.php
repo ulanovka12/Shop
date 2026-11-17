@@ -10,22 +10,20 @@ class StoreProductRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true; // проверка прав
+        return true;
     }
 
     public function rules(): array
     {
         return [
             'name'        => ['required', 'string', 'max:255'],
-            'price'       => ['required', 'numeric', 'min:0', 'max:99999.99'],
+            'price'       => ['required', 'numeric', 'min:0', 'max:9999999.99'],
             'stock'       => ['required', 'integer', 'min:0'],
             'sku'         => ['required', 'string', 'unique:products,sku'],
             'is_active' => ['boolean'],
             'image'       => ['nullable', 'image', 'max:2048'],
             'category_id' => ['nullable', 'exists:categories,id'],
             'description' => ['nullable', 'string'],
-
-
         ];
     }
 }

@@ -91,7 +91,7 @@ class SalesReportService
                 fn (DailySalesReport $report): float => (float) $report->revenue
             ),
             'canceled_count' => $reports->sum('canceled_count'),
-            'daily_reports' => $reports, // Передаем саму коллекцию для таблицы
+            'daily_reports' => $reports,
             'calculated_at' => $reports->max('calculated_at'),
         ];
     }
