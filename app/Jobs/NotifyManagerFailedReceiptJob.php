@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Jobs;
 
+use App\Mail\ReceiptFailedNotification;
 use App\Models\PaymentReceipt;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\ReceiptFailedNotification; // Создадим ниже
+use Illuminate\Support\Facades\Mail; // Создадим ниже
 
 class NotifyManagerFailedReceiptJob implements ShouldQueue
 {

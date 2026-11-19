@@ -6,14 +6,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Services\YooKassaPaymentService;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class YooKassaController extends Controller
 {
-
     public function return(Order $order, YooKassaPaymentService $yooKassaService): RedirectResponse
     {
         // Берем последнюю попытку оплаты

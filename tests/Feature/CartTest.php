@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature;
 
 use App\Models\Product;
@@ -49,7 +51,7 @@ class CartTest extends TestCase
         // корзина хранится как массив, где ключ - это ID товара:
         $cart = session()->get('cart');
 
-//        dump($cart);
+        //        dump($cart);
 
         // Assert
         $response->assertStatus(302);

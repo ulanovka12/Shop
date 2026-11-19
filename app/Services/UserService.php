@@ -6,8 +6,8 @@ namespace App\Services;
 
 use App\DTOs\RegisterDto;
 use App\DTOs\UpdateProfileDto;
-use App\Models\User;
 use App\Jobs\SendRegistrationVerificationJob;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 class UserService

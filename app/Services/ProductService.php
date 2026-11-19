@@ -8,9 +8,9 @@ use App\DTOs\ProductDto;
 use App\DTOs\ProductFilterDto;
 use App\Models\Product;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 
 class ProductService
 {
@@ -74,14 +74,21 @@ class ProductService
         }
 
         switch ($dto->sort) {
-            case 'price_asc':  $query->orderBy('price', 'asc'); break;
-            case 'price_desc': $query->orderBy('price', 'desc'); break;
-            case 'name_asc':   $query->orderBy('name', 'asc'); break;
-            case 'name_desc':  $query->orderBy('name', 'desc'); break;
-            case 'stock_asc':  $query->orderBy('stock', 'asc'); break;
-            case 'stock_desc': $query->orderBy('stock', 'desc'); break;
+            case 'price_asc':  $query->orderBy('price', 'asc');
+                break;
+            case 'price_desc': $query->orderBy('price', 'desc');
+                break;
+            case 'name_asc':   $query->orderBy('name', 'asc');
+                break;
+            case 'name_desc':  $query->orderBy('name', 'desc');
+                break;
+            case 'stock_asc':  $query->orderBy('stock', 'asc');
+                break;
+            case 'stock_desc': $query->orderBy('stock', 'desc');
+                break;
             case 'new':
-            default:           $query->orderByDesc('created_at'); break;
+            default:           $query->orderByDesc('created_at');
+                break;
         }
 
         $query->orderByDesc('id');
@@ -147,7 +154,7 @@ class ProductService
         return (int) Cache::get(self::CATALOG_VERSION_KEY);
     }
 
-    private function invalidateCatalogCache(): void
+    public function invalidateCatalogCache(): void
     {
         Cache::increment(self::CATALOG_VERSION_KEY);
     }

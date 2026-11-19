@@ -7,13 +7,12 @@ namespace App\Services;
 use App\Models\Order;
 use App\Models\OrderPayment;
 use App\Models\PaymentReceipt;
+use Exception;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use YooKassa\Client;
-use YooKassa\Model\PaymentInterface;
-use Exception;
-use YooKassa\Request\Payments\PaymentResponse;
 use YooKassa\Common\Exceptions\NotFoundException;
+use YooKassa\Request\Payments\PaymentResponse;
 
 class YooKassaPaymentService
 {
