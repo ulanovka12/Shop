@@ -11,7 +11,6 @@ class RegisterController extends Controller
 {
     public function store(RegisterRequest $request)
     {
-        // Преобразуем реквест в DTO
         $dto = RegisterDto::fromRequest($request);
 
         // Передаём DTO в сервис

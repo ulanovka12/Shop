@@ -20,26 +20,16 @@ readonly class ProductSearchService
     public function __construct(private Client $client)
     {
     }
-
-    /**
-     * Имя alias (берется из конфига)
-     */
     private function alias(): string
     {
         return (string) config('elasticsearch.index', 'shop-products');
     }
 
-    /**
-     * Ключ для блокировки переиндексации
-     */
     private function lockKey(): string
     {
         return 'elasticsearch:reindex:' . $this->alias();
     }
 
-    /**
-     * Mapping (из раздела 4.2 инструкции)
-     */
     private function mapping(): array
     {
         return [
@@ -65,9 +55,6 @@ readonly class ProductSearchService
         ];
     }
 
-    /**
-     * Преобразование модели в документ (из раздела 4.3)
-     */
     private function document(Product $product): array
     {
         return [
@@ -83,9 +70,6 @@ readonly class ProductSearchService
         ];
     }
 
-    /**
-     * Полная переиндексация (из раздела 5.1)
-     */
     public function reindex(int $batchSize = 500): int
     {
         if ($batchSize < 1 || $batchSize > 5000) {
@@ -132,9 +116,6 @@ readonly class ProductSearchService
         });
     }
 
-    /**
-     * Поиск (из раздела 6.2)
-     */
     public function search(ProductFilterDto $dto, int $perPage, ?int $categoryId = null, ?int $page = null): LengthAwarePaginator
     {
         $page ??= Paginator::resolveCurrentPage();
@@ -159,9 +140,6 @@ readonly class ProductSearchService
         ]);
     }
 
-    /**
-     * Тело поискового запроса (из раздела 6.3)
-     */
     private function searchBody(ProductFilterDto $dto, int $perPage, int $page, ?int $categoryId): array
     {
         $query = mb_strtolower(trim((string) $dto->q));
@@ -215,9 +193,6 @@ readonly class ProductSearchService
         ];
     }
 
-    /**
-     * Синхронизация одного товара (из раздела 6.5)
-     */
     public function sync(int $productId): void
     {
         Cache::lock($this->lockKey(), 120)->block(5, function () use ($productId): void {
@@ -244,8 +219,6 @@ readonly class ProductSearchService
                     }
                 }
             }
-
-            // Если у вас класс ProductService лежит в App\Services, оставляем так.
             app(\App\Services\ProductService::class)->invalidateCatalogCache();
         });
     }

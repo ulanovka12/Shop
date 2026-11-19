@@ -25,7 +25,6 @@ class AddressController extends Controller
         $data['is_default'] = $request->boolean('is_default');
 
         DB::transaction(function () use ($request, $data) {
-            // если новый адрес «по умолчанию» — снимаем флаг со старых
             if ($data['is_default']) {
                 $request->user()->addresses()->update(['is_default' => false]);
             }

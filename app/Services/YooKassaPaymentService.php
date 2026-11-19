@@ -53,7 +53,6 @@ class YooKassaPaymentService
             $payload['receipt'] = $this->createReceipt($order);
         }
 
-        // ИСПОЛЬЗУЕМ SDK:
         try {
             $response = $this->client->createPayment($payload, $idempotenceKey);
         } catch (Exception $e) {
@@ -75,12 +74,12 @@ class YooKassaPaymentService
             'response_payload' => $response->jsonSerialize(),
         ]);
 
-        // Сохраняем чек (как мы обсуждали в прошлом шаге)
+        // Сохраняем чек
         if (isset($payload['receipt'])) {
             PaymentReceipt::create([
                 'order_payment_id' => $orderPayment->id,
                 'type' => 'payment',
-                'status' => 'pending', // В SDK статус регистрации чека не всегда сразу возвращается в ответе на создание
+                'status' => 'pending',
                 'send_to_customer' => true,
                 'request_payload' => $payload['receipt'],
                 'response_payload' => $response->jsonSerialize()['receipt'] ?? null,
@@ -147,16 +146,14 @@ class YooKassaPaymentService
             'canceled_at' => $paymentData->getStatus() === 'canceled' ? now() : null,
         ]);
 
-        // Проверка статуса чека (если чек отправлялся)
         if ($paymentData->getReceiptRegistration()) {
-            $receiptStatus = $paymentData->getReceiptRegistration(); // 'succeeded', 'pending', 'canceled'
+            $receiptStatus = $paymentData->getReceiptRegistration();
 
             // Обновляем локальный чек
             $localReceipt = $localPayment->receipts()->first();
             if ($localReceipt) {
                 $localReceipt->update(['status' => $receiptStatus]);
 
-                // Если чек отвалился (canceled) — шлем задачу в RabbitMQ!
                 if ($receiptStatus === 'canceled') {
                     \App\Jobs\NotifyManagerFailedReceiptJob::dispatch($localReceipt);
                 }
@@ -168,9 +165,6 @@ class YooKassaPaymentService
         }
     }
 
-    /**
-     * Формирование массива чека
-     */
     public function createReceipt(Order $order): array
     {
         $receiptsConfig = config('services.yookassa.receipts');
@@ -191,7 +185,6 @@ class YooKassaPaymentService
 
         return [
             'customer' => [
-                // было: 'email' => $order->user->email,
                 'email' => $order->user?->email ?? 'no-email@example.com',
             ],
             'items' => $items,

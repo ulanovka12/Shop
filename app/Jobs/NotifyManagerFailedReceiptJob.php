@@ -8,7 +8,7 @@ use App\Mail\ReceiptFailedNotification;
 use App\Models\PaymentReceipt;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
-use Illuminate\Support\Facades\Mail; // Создадим ниже
+use Illuminate\Support\Facades\Mail;
 
 class NotifyManagerFailedReceiptJob implements ShouldQueue
 {

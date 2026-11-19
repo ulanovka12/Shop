@@ -19,7 +19,6 @@ class GenerateSalesReportsJob implements ShouldQueue
     public function __construct()
     {
         $this->onConnection('rabbitmq');
-        // Отправляем в отдельную очередь для отчетов
         $this->onQueue('orders.reports.sales');
     }
 

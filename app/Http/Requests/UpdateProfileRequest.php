@@ -10,22 +10,14 @@ use Illuminate\Validation\Rule;
 
 class UpdateProfileRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return void
-     */
+
     protected function prepareForValidation(): void
     {
-        // Убираем "+" из номера телефона перед валидацией
         if ($this->has('phone')) {
             $this->merge([
                 'phone' => str_replace('+', '', $this->phone)
@@ -41,7 +33,7 @@ class UpdateProfileRequest extends FormRequest
                 'string',
                 'max:255',
                 'min:2',
-                'regex:/^[а-яА-ЯёЁa-zA-Z\s\-]+$/u' // только буквы, пробелы и дефисы
+                'regex:/^[а-яА-ЯёЁa-zA-Z\s\-]+$/u'
             ],
             'last_name' => [
                 'nullable',
@@ -55,12 +47,12 @@ class UpdateProfileRequest extends FormRequest
                 'string',
                 'email',
                 'max:255',
-                Rule::unique('users', 'email')->ignore(Auth::id()) // игнорировать текущего пользователя
+                Rule::unique('users', 'email')->ignore(Auth::id())
             ],
             'phone' => [
                 'nullable',
                 'string',
-                'regex:/^[0-9]{10,15}$/', // от 10 до 15 цифр
+                'regex:/^[0-9]{10,15}$/',
                 Rule::unique('users', 'phone')->ignore(Auth::id())
             ],
         ];

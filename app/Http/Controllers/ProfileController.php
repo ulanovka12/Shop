@@ -20,9 +20,6 @@ class ProfileController extends Controller
     ) {
     }
 
-    /**
-     * Display the user's profile form.
-     */
     public function edit(Request $request): View
     {
         return view('profile.edit', [
@@ -30,9 +27,7 @@ class ProfileController extends Controller
         ]);
     }
 
-    /**
-     * Show the user's profile.
-     */
+
     public function showProfile(): View
     {
         $user = Auth::user();
@@ -40,9 +35,7 @@ class ProfileController extends Controller
         return view('auth.profile', compact('user'));
     }
 
-    /**
-     * Update the user's profile information.
-     */
+
     public function updateProfile(UpdateProfileRequest $request): RedirectResponse
     {
         $dto = UpdateProfileDto::fromRequest($request);
@@ -54,9 +47,7 @@ class ProfileController extends Controller
             ->with('status', 'profile-updated');
     }
 
-    /**
-     * Delete the user's account.
-     */
+
     public function destroy(Request $request): RedirectResponse
     {
         $request->validateWithBag('userDeletion', [

@@ -24,8 +24,6 @@ class UserService
             throw new \RuntimeException('save() вернул false — запись не создана');
         }
 
-        // 2. Отправляем задачу в RabbitMQ
-        // Важно: мы делаем это ТОЛЬКО после успешного $user->save()
         SendRegistrationVerificationJob::dispatch($user->id);
 
         return $user;
@@ -50,7 +48,6 @@ class UserService
         if (! $user->save()) {
             throw new \RuntimeException('Не удалось сохранить профиль пользователя');
         }
-
         return $user;
     }
     public function updatePassword(

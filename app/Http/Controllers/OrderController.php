@@ -23,7 +23,7 @@ class OrderController
     {
         $orders = Order::query()
             ->where('user_id', Auth::id())
-            ->with(['items.product', 'latestPayment']) // Добавили загрузку последнего платежа для отображения статуса
+            ->with(['items.product', 'latestPayment'])
             ->orderByDesc('created_at')
             ->get();
 
@@ -40,52 +40,43 @@ class OrderController
     ): RedirectResponse {
         $user = Auth::user();
 
-        // 1. Сохраняем результат в $order
         $order = $service->createOrder(
             $user,
             $request->validated()['payment_method'],
             $cart
         );
 
-        // 2. Ставим письмо в очередь (для админа)
         Mail::to(config('mail.admin_address'))
             ->queue(new OrderPlaced($order));
 
-        // 3. ЛОГИКА ДЛЯ ЮKASSA:
-        // Если пользователь выбрал онлайн-оплату, сразу создаем платеж
+        // Если пользователь выбрал онлайн-оплату, сразу создаю платеж
         if ($order->payment_method === Order::PAYMENT_METHOD_YOOKASSA) {
             $payment = $yooKassaService->createPaymentForOrder($order);
 
-            // Если ЮKassa вернула ссылку на оплату — перенаправляем туда
             if ($payment->confirmation_url) {
                 return redirect($payment->confirmation_url);
             }
 
-            // Если ссылки нет (ошибка), возвращаем назад с сообщением
             return redirect()
                 ->route('orders.index')
                 ->with('error', 'Не удалось создать платеж. Попробуйте позже.');
         }
 
-        // Если оплата наличными — просто показываем список заказов
         return redirect()
             ->route('orders.index')
             ->with('success', 'Заказ создан.');
     }
 
-    /**
-     * Новый метод pay() для повторной оплаты из списка "Мои заказы"
-     */
+
     public function pay(
         Order $order,
         YooKassaPaymentService $yooKassaService
     ): RedirectResponse {
-        // Проверяем, что заказ принадлежит текущему пользователю
+
         if ($order->user_id !== Auth::id()) {
             abort(403, 'Доступ запрещен');
         }
 
-        // Проверяем, что заказ еще не оплачен и ожидает оплаты
         if ($order->status !== Order::STATUS_PENDING) {
             return back()->with('error', 'Этот заказ не требует оплаты.');
         }
@@ -127,7 +118,6 @@ class OrderController
 
     public function paymentHistory(Order $order)
     {
-        // Проверка, что заказ принадлежит пользователю
         if ($order->user_id !== auth()->id()) {
             abort(403);
         }

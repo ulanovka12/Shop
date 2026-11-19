@@ -31,11 +31,11 @@ class SearchProductsCommand extends Command
             max_price: $this->option('max-price') !== null ? (int)$this->option('max-price') : null,
             in_stock: (bool)$this->option('in-stock'),
             sort: $this->option('sort') ?? 'new',
-            per_page: (int)$this->option('per-page') // Добавили обязательный параметр
+            per_page: (int)$this->option('per-page')
         );
 
         try {
-            // Передаем DTO и параметры в сервис
+
             $paginator = $search->search(
                 $dto,
                 $dto->per_page,

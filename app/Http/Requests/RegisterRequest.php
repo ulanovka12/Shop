@@ -8,11 +8,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class RegisterRequest extends FormRequest
 {
-    /**
-     * Регистрация доступна всем (даже неавторизованным)
-     *
-     * @return bool
-     */
     public function authorize(): bool
     {
         return true;
@@ -27,11 +22,6 @@ class RegisterRequest extends FormRequest
         ];
     }
 
-    /**
-     * Возвращает сообщение об ошибке на отдельное взятое правило
-     *
-     * @return string[]
-     */
     public function messages(): array
     {
         return [

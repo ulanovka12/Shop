@@ -6,7 +6,7 @@ namespace App\Http\Requests;
 
 use App\Models\Order; // <-- Импорт модели
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule; // <-- Импорт Rule
+use Illuminate\Validation\Rule;
 
 class OrderStoreRequest extends FormRequest
 {
@@ -21,7 +21,7 @@ class OrderStoreRequest extends FormRequest
             'payment_method' => [
                 'required',
                 'string',
-                Rule::in(Order::PAYMENT_METHODS),//константа из модельки
+                Rule::in(Order::PAYMENT_METHODS),
             ],
         ];
     }

@@ -34,7 +34,6 @@ class CategoryController extends Controller
 
         $query = Product::where('category_id', $category->id);
 
-        // Максимальная цена среди товаров этой категории для слайдера
         $maxProductPrice = (clone $query)->max('price') ?? 0;
 
         $products = $query->paginate($filter->per_page)->withQueryString();

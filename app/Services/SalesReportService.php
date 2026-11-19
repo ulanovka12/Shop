@@ -30,9 +30,6 @@ class SalesReportService
         }
     }
 
-    /**
-     * Пересчитывает один день и сохраняет в БД.
-     */
     public function refreshReportForDate(CarbonInterface $date): DailySalesReport
     {
         $startOfDay = $date->copy()->startOfDay();
