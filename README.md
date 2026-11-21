@@ -4,7 +4,7 @@ A full-featured e-commerce platform built with Laravel. This project demonstrate
 
 ## 🛠 Tech Stack
 *   **Backend:** PHP 8.x, Laravel 11
-*   **Database:** MySQL
+*   **Database:** PostgresSQL
 *   **Message Broker:** RabbitMQ (for async background tasks)
 *   **Frontend:** Blade templates, Tailwind CSS
 *   **Testing:** PHPUnit (Unit & Feature tests)
